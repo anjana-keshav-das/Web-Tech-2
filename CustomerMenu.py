@@ -12,18 +12,23 @@ db = client.PizzaDB
 @app.route("/api/v1/menu", methods=['GET'])
 @app.route("/api/v1/menu?category=<category>", methods=['GET'])
 def get_menu():
-    category = request.args.get('details')
+    category = request.args.get('category')
     menu = db.menu
+    cat = db.categories
     if(category == None):
         q = menu.find({})
     else:
+        q = cat.find_one({"name": category})
+        if (q == None):
+            print("No data")
+            return jsonify([]), 204
         q = menu.find({"category": category})
     if(q == None):
         print("No data")
         return jsonify([]), 204
     output = []
     for i in q:
-        temp = {'itemID': i['itemID'], 'category': i['category'], 'name': i['name'],
+        temp = {'category': i['category'], 'name': i['name'],
                 'desc': i['desc'], 'price': i['price'], 'img': i['img']}
         output.append(temp)
     return jsonify(output), 200
@@ -31,7 +36,7 @@ def get_menu():
 # Get all categories
 @app.route("/api/v1/menu/category", methods=['GET'])
 def get_categories():
-    category = db.category
+    category = db.categories
     q = category.find({})
     if(q == None):
         print("No data")
@@ -39,7 +44,7 @@ def get_categories():
     else:
         output = []
         for i in q:
-            temp = {'count': i['count'], 'category': i['category']}
+            temp = {'count': i['count'], 'category': i['name']}
             output.append(temp)
         return jsonify(output), 200
 
@@ -54,7 +59,8 @@ def get_toppings():
     else:
         output = []
         for i in q:
-            temp = {'price': i['price'], 'name': i['name'], 'img': i['img']}
+            # , 'img': i['img']}
+            temp = {'price': i['price'], 'name': i['name']}
             output.append(temp)
         return jsonify(output), 200
 
@@ -67,49 +73,71 @@ def get_cart(username):
         print("No data")
         return jsonify([]), 204
     else:
-        output = []
+        output = {}
+        tmp = []
         items = q['items']
         for i in items:
-            temp = {"name": i['name'], "price": i["price"],
-                    "topping": i["topping"], "quan": i["quan"]}
-            output.append(temp)
-        output.append({"total": q["total"]})
+            if('toppings' in i):
+                temp = {"name": i['name'], "price": i["price"],
+                        "toppings": i["toppings"], "quantity": i["quantity"]}
+            else:
+                temp = {"name": i['name'], "price": i["price"],
+                        "quantity": i["quantity"]}
+            tmp.append(temp)
+        output['items'] = tmp
+        output['total'] = q['total']
         return jsonify(output), 200
 
-# Empty cart
+# Empty cart or delete an item
 @app.route("/api/v1/menu/cart/<username>", methods=['DELETE'])
+@app.route("/ api/v1/menu/cart/<username>?item=<item>", methods=['DELETE'])
 def delete_cart(username):
+    item = request.args.get('item')
     cart = db.cart
-    q = cart.remove({'username': username})
-    if(q['n'] == 0):
-        print("Bad Request: Empty Cart")
-        return jsonify({}), 400
+    if(item == None):
+        q = cart.remove({'username': username})
+        if(q['n'] == 0):
+            print("Bad Request: Empty Cart")
+            return jsonify({}), 400
+        else:
+            print("Cart empty")
+            return jsonify({}), 200
     else:
-        print("Cart empty")
-        return jsonify({}), 200
+        q = cart.find_one({'username': username})
+        if (q == None):
+            print("Bad Request: Empty Cart")
+            return jsonify({}), 400
+        else:
+            q = cart.update({'username': username}, {
+                '$pull': {'items': {"name": item}}})
+            print("success")
+            return jsonify({}), 200
+
 
 # Add item in cart
 # or Change quanity (if it becomes 0 delete from cart)
 @app.route("/api/v1/menu/cart/<username>", methods=['POST'])
-@app.route("/api/v1/menu/cart/<username>?item=<item>&qnt=<qnt>")
+@app.route("/api/v1/menu/cart/<username>?item=<item>&qnt=<qnt>", methods=['POST'])
 def add_item(username):
     item = request.args.get('item')
     qnt = request.args.get('qnt')
     cart = db.cart
+    details = db.details
+    add = details.find_one({"username": username}, {"address": 1})
     q = cart.find_one({'username': username})
     if(item == None or qnt == None):
         if(q == None):
-            if(request.json['toppings'] != None):
+            if('toppings' in request.json):
                 res = {'username': username, 'items': [{'name': request.json['name'], 'price':request.json['price'],
-                                                        'toppings':request.json['toppings'], "quantity":request.json['quantity']}], 'total': request.json['price']}
+                                                        'toppings':request.json['toppings'], "quantity":request.json['quantity']}], "address": add['address'], 'total': request.json['price']}
             else:
                 res = {'username': username, 'items': [
-                    {'name': request.json['name'], 'price':request.json['price', "quantity":request.json['quantity']]}], 'total': request.json['price']}
+                    {'name': request.json['name'], 'price':request.json['price'], "quantity":request.json['quantity']}], "address": add['address'], 'total': request.json['price']}
             q = cart.insert(res)
             print("Inserted")
             return jsonify({}), 201
         else:
-            if(request.json['toppings'] != None):
+            if('toppings' in request.json):
                 res = {'name': request.json['name'], 'price': request.json['price'],
                        'toppings': request.json['toppings'], 'quantity': request.json['quantity']}
             else:
@@ -124,7 +152,23 @@ def add_item(username):
             print("success")
             return jsonify({}), 200
     else:
-        pass
+        if (q == None):
+            print("No such user")
+            return jsonify({}), 400
+        else:
+            if (qnt <= 0):
+                q = cart.update({'username': username}, {
+                                '$pull': {'items': {"name": item}}})
+                print("success")
+                return jsonify({}), 200
+            q = cart.update({'username': username, 'items.name': item}, {
+                            '$inc': {'items.$.quantity': int(qnt)}})
+            if (q['n'] == 0):
+                print("didn't work")
+                return jsonify({}), 400
+            else:
+                print("success")
+                return jsonify({}), 200
 
 
 if __name__ == '__main__':
