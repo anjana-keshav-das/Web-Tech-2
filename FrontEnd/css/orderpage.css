@@ -1,0 +1,1157 @@
+/*! CSS Used from: Embedded */
+
+.bdMFpM {
+    background-image: url(https://pizzaonline.dominos.co.in/static/assets/icons/edit@2x.png);
+    min-width: 0.3em;
+    min-height: 0.3em;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 0.9rem;
+    height: 0.9rem;
+    margin: 0.3rem 0px 0px 1rem;
+    cursor: pointer;
+}
+
+.bIHrl {
+    background-image: url(https://pizzaonline.dominos.co.in/static/assets/icons/veg.svg);
+    min-width: 0.3em;
+    min-height: 0.3em;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: inline-block;
+    top: 0px;
+    left: 3.5rem;
+    position: initial;
+    width: 2rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+}
+
+.grexJM {
+    background-image: url(https://pizzaonline.dominos.co.in/static/assets/icons/non_veg.svg);
+    min-width: 0.3em;
+    min-height: 0.3em;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: inline-block;
+    top: 0px;
+    left: 3.5rem;
+    position: initial;
+    width: 2rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+}
+
+.eRJwMX {
+    display: flex;
+    flex-flow: row wrap;
+    right: 0px;
+    left: 0px;
+    max-width: 100%;
+    flex-basis: auto;
+    border-radius: 3px;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 2px 4px 0px;
+    -webkit-box-pack: center;
+    justify-content: center;
+    margin: 0rem;
+}
+
+.eRJwMX .wd-100 {
+    width: 100%;
+}
+
+.dnurXH {
+    background-image: url(https://pizzaonline.dominos.co.in/static/assets/icons/shadow.svg);
+    min-width: 0.3em;
+    min-height: 0.3em;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 6rem;
+    height: 4rem;
+    position: absolute;
+    bottom: 0px;
+}
+
+.iBNnip {
+    background-image: url(https://pizzaonline.dominos.co.in/static/assets/icons/shadow.svg);
+    min-width: 0.3em;
+    min-height: 0.3em;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 1.6rem;
+    height: 1rem;
+    position: absolute;
+    transform: rotate(180deg);
+    right: 0px;
+    top: 0px;
+    opacity: 0.2;
+    border-radius: 1rem;
+}
+
+.iwmcbq {
+    background-image: url(https://pizzaonline.dominos.co.in/static/assets/icons/favorite.svg);
+    min-width: 0.3em;
+    min-height: 0.3em;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    right: 0px;
+}
+
+.jFdQPf {
+    background-image: url(https://pizzaonline.dominos.co.in/static/assets/icons/non_veg.svg);
+    min-width: 0.3em;
+    min-height: 0.3em;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 1rem;
+    height: 1rem;
+}
+
+.fkPpkx {
+    align-self: center;
+    position: absolute;
+    right: 0.6rem;
+    bottom: 1rem;
+}
+
+.fkPpkx button {
+    border-radius: 3px;
+    outline: none;
+    text-transform: uppercase;
+    padding: 0.5em 1em;
+    border: none;
+}
+
+.fkPpkx .btn--cstmz {
+    border: 1px solid rgb(255, 255, 255);
+    color: rgba(53, 53, 53, 0.87);
+    background-color: rgb(255, 255, 255);
+    opacity: 0.92;
+    display: flex;
+    padding: 0.1rem 0.1rem 0.1rem 0.3rem;
+}
+
+.fkPpkx .btn--cstmz>span {
+    font-size: 0.82em;
+    font-weight: 500;
+    margin-top: 0.4em;
+}
+
+.fkPpkx button {
+    font-size: 0.76rem;
+    font-weight: 500;
+}
+
+.fkPpkx button>span {
+    margin-top: 0.1rem!important;
+}
+
+.fkPpkx button>div {
+    width: 0.7rem;
+    margin-top: 0.1rem;
+}
+
+.FTAhK {
+    background-image: url(https://pizzaonline.dominos.co.in/static/assets/icons/customise_arrow.svg);
+    min-width: 0.3em;
+    min-height: 0.3em;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.4em;
+    margin-left: 0.3em;
+}
+
+.dVfvkq {
+    position: relative;
+    padding-bottom: 0.1rem;
+}
+
+.dVfvkq .nm-icn {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.dVfvkq .itm-dsc__actn__sz__dd-ttl {
+    font-size: 11px;
+    color: rgb(53, 53, 53);
+    display: flex;
+    font-weight: 600;
+}
+
+.ebOjDJ {
+    background-image: url(https://pizzaonline.dominos.co.in/static/assets/icons/down_arrow_filled.svg);
+    min-width: 0.3em;
+    min-height: 0.3em;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    margin-left: 0.6em;
+    margin-top: 0.4em;
+    width: 1em;
+    font-weight: 600;
+}
+
+.jrxrSi {
+    align-self: center;
+}
+
+.jrxrSi button {
+    border-radius: 3px;
+    outline: none;
+    text-transform: uppercase;
+    padding: 0.5em 1em;
+    border: none;
+}
+
+.jrxrSi button {
+    cursor: pointer;
+    padding: 0.433rem;
+    border: 1px solid rgb(0, 171, 0);
+    color: rgb(0, 171, 0);
+    background-color: rgb(255, 255, 255);
+}
+
+.jrxrSi button>span {
+    font-weight: 600;
+    font-size: 0.68rem;
+}
+
+.khLfXP {
+    background-image: url(https://pizzaonline.dominos.co.in/static/assets/icons/veg.svg);
+    min-width: 0.3em;
+    min-height: 0.3em;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 1rem;
+    height: 1rem;
+}
+
+/*! CSS Used from: Embedded */
+
+body {
+    margin: 0px;
+    background-color: rgb(242, 242, 242);
+    font-family: proxima-nova, sans-serif;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+button {
+    cursor: pointer;
+}
+
+.hdr {
+    transition: all 1s ease-in-out 0s;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+input:focus {
+    outline: none;
+}
+
+input {
+    font-family: proxima-nova, sans-serif;
+}
+
+input::-webkit-input-placeholder {
+    font-family: proxima-nova, sans-serif;
+}
+
+input::placeholder {
+    font-family: proxima-nova, sans-serif;
+}
+
+.mn-cnt {
+    min-height: 75vh;
+}
+
+.online-strip {
+    display: none;
+}
+
+.rupee::before {
+    content: "₹ ";
+}
+
+:focus {
+    outline: none!important;
+}
+
+.jOzRjN label {
+    display: block;
+    position: relative;
+    padding-left: 2.5rem;
+    padding-top: 0.5rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    font-size: 0.8125rem;
+    user-select: none;
+    color: rgb(255, 255, 255);
+}
+
+.jOzRjN .non--slctd {
+    color: rgb(190, 190, 190);
+}
+
+.jOzRjN .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.jOzRjN .checkmark {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 1.25rem;
+    width: 1.25rem;
+    background-color: transparent;
+    border-radius: 50%;
+    border: 1px solid;
+}
+
+.jOzRjN .container .checkmark .checked {
+    top: 0.125rem;
+    left: 0.125rem;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 50%;
+    background: rgb(0, 102, 167);
+    position: absolute;
+}
+
+.kAneUI {
+    display: flex;
+}
+
+.kAneUI div label.non--slctd {
+    color: rgb(85, 204, 246)!important;
+}
+
+.kAneUI div label {
+    color: rgb(255, 255, 255);
+    display: flex;
+    padding-top: 0.1rem;
+    padding-left: 1.5rem;
+    margin-right: 1.5rem;
+}
+
+.kAneUI div label .checkmark {
+    height: 0.8rem;
+    width: 0.8rem;
+    background-color: transparent;
+    border-radius: 50%;
+    border: 2px solid;
+}
+
+.kAneUI div label .checkmark .checked {
+    border-radius: 50%;
+    position: absolute;
+    top: 0.11rem!important;
+    left: 0.06rem!important;
+    width: 0.68rem!important;
+    height: 0.68rem!important;
+    background: rgb(255, 255, 255)!important;
+}
+
+.eZJyUd {
+    left: 1rem;
+    top: 1rem;
+    position: fixed;
+    cursor: pointer;
+    z-index: 99;
+    padding: 0.3rem;
+}
+
+.eZJyUd .ovrly-child {
+    position: static;
+}
+
+@media screen and (max-width: 95rem) and (min-width: 81.25rem) {
+    .eZJyUd .side-nav .ovrly-child {
+        margin-left: 0px;
+    }
+}
+
+.eZJyUd .side-nav {
+    width: 30vw;
+    background-color: white;
+    position: fixed;
+    z-index: 1;
+    top: 0px;
+    right: 0px;
+    margin: 0px;
+    height: 100vh;
+    transition: width 2s ease 0s;
+    overflow-x: auto;
+    box-shadow: rgba(0, 0, 0, 0.69) 1rem 0px 0.87rem 0px;
+    cursor: default;
+}
+
+.htciLv {
+    left: 1rem;
+    top: 1rem;
+    position: fixed;
+    cursor: pointer;
+    z-index: 99;
+    padding: 0.3rem;
+}
+
+.htciLv .ovrly-child {
+    position: static;
+}
+
+@media screen and (max-width: 95rem) and (min-width: 81.25rem) {
+    .htciLv .side-nav .ovrly-child {
+        margin-left: 0px;
+    }
+}
+
+.htciLv .side-nav {
+    width: 30vw;
+    background-color: white;
+    position: fixed;
+    z-index: 1;
+    top: 0px;
+    right: 0px;
+    margin: 0px;
+    height: 100vh;
+    transition: width 2s ease 0s;
+    overflow-x: auto;
+    box-shadow: rgba(0, 0, 0, 0.69) -0.43rem 0px 0.87rem 0px;
+    cursor: default;
+}
+
+.ibjfzk {
+    left: 1rem;
+    top: 1rem;
+    position: fixed;
+    cursor: pointer;
+    z-index: 99;
+    padding: 0.3rem;
+}
+
+.ibjfzk .ovrly-child {
+    position: static;
+}
+
+@media screen and (max-width: 95rem) and (min-width: 81.25rem) {
+    .ibjfzk .side-nav .ovrly-child {
+        margin-left: 0px;
+    }
+}
+
+.ibjfzk .side-nav {
+    width: 30vw;
+    background-color: white;
+    position: fixed;
+    z-index: 1;
+    top: 0px;
+    right: 0px;
+    margin: 0px;
+    height: 100vh;
+    transition: width 2s ease 0s;
+    overflow-x: auto;
+    box-shadow: rgba(0, 0, 0, 0.69) 1rem 0px 0.87rem 0px;
+    cursor: default;
+}
+
+.bOckcA {
+    left: 1rem;
+    top: 1rem;
+    position: absolute;
+    cursor: pointer;
+    z-index: 99;
+    padding: 0.3rem;
+}
+
+.bOckcA .ovrly-child {
+    position: static;
+}
+
+@media screen and (max-width: 95rem) and (min-width: 81.25rem) {
+    .bOckcA .side-nav .ovrly-child {
+        margin-left: 0px;
+    }
+}
+
+.bOckcA .side-nav {
+    width: 30vw;
+    background-color: white;
+    position: fixed;
+    z-index: 1;
+    top: 0px;
+    right: 0px;
+    margin: 0px;
+    height: 100vh;
+    transition: width 2s ease 0s;
+    overflow-x: auto;
+    box-shadow: rgba(0, 0, 0, 0.69) -0.43rem 0px 0.87rem 0px;
+    cursor: default;
+}
+
+.bOckcA .side-nav {
+    background-color: rgb(255, 255, 255);
+    right: 0px;
+}
+
+.goHSbr {
+    left: 1rem;
+    top: 1rem;
+    position: fixed;
+    cursor: pointer;
+    z-index: 99;
+    padding: 0.3rem;
+}
+
+.goHSbr .ovrly-child {
+    position: static;
+}
+
+@media screen and (max-width: 95rem) and (min-width: 81.25rem) {
+    .goHSbr .side-nav .ovrly-child {
+        margin-left: 0px;
+    }
+}
+
+.goHSbr .side-nav {
+    width: 30vw;
+    background-color: white;
+    position: fixed;
+    z-index: 1;
+    top: 0px;
+    right: 0px;
+    margin: 0px;
+    height: 100vh;
+    transition: width 2s ease 0s;
+    overflow-x: auto;
+    box-shadow: rgba(0, 0, 0, 0.69) -0.43rem 0px 0.87rem 0px;
+    cursor: default;
+}
+
+.goHSbr .side-nav {
+    background-color: rgb(233, 237, 239);
+    right: 0px;
+}
+
+.bdnbsR {
+    left: 1rem;
+    top: 1rem;
+    position: fixed;
+    cursor: pointer;
+    z-index: 99;
+    padding: 0.3rem;
+}
+
+.bdnbsR .ovrly-child {
+    position: static;
+}
+
+@media screen and (max-width: 95rem) and (min-width: 81.25rem) {
+    .bdnbsR .side-nav .ovrly-child {
+        margin-left: 0px;
+    }
+}
+
+.bdnbsR .side-nav {
+    width: 30vw;
+    background-color: white;
+    position: fixed;
+    z-index: 1;
+    top: 0px;
+    right: 0px;
+    margin: 0px;
+    height: 100vh;
+    transition: width 2s ease 0s;
+    overflow-x: auto;
+    box-shadow: rgba(0, 0, 0, 0.69) 1rem 0px 0.87rem 0px;
+    cursor: default;
+}
+
+.gzNohf {
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 99;
+    background: rgb(0, 102, 167);
+}
+
+.gzNohf .tp-hdr {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    align-items: center;
+    height: 3rem;
+    padding: 0rem 1.5rem;
+}
+
+.gzNohf .logo-grp {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    padding-left: 1rem;
+}
+
+.gzNohf .slct-lctn {
+    padding: 0.5rem 0.9rem;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    background: rgb(0, 88, 153);
+    min-width: 14rem;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.gzNohf .slct-lctn img {
+    width: 1.2rem;
+    margin-right: 1rem;
+}
+
+.gzNohf .slct-lctn-cnt {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+}
+
+.gzNohf .slct-lctn-cnt>img {
+    width: 1rem;
+}
+
+.gzNohf .slct-lctn-txt {
+    font-size: 0.72rem;
+    display: flex;
+    flex-direction: column;
+    color: rgb(85, 204, 246);
+}
+
+.gzNohf .slct-lctn-txt-slctd {
+    color: rgb(255, 255, 255);
+}
+
+.gzNohf .addr-prf-cnt {
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    margin-right: 2rem;
+    border-left: 1px solid rgb(0, 203, 188);
+    padding-left: 0.5rem;
+}
+
+.gzNohf .prf-grp {
+    margin-left: 1rem;
+    display: flex;
+    -webkit-box-align: center;
+    align-items: center;
+    font-size: 0.75rem;
+    cursor: pointer;
+}
+
+.gzNohf .prf-grp img {
+    width: 1.8rem;
+    margin-right: 1rem;
+}
+
+.gzNohf .prf-grp-txt {
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+}
+
+.gzNohf .prf-grp-txt-hd {
+    color: rgb(85, 204, 246);
+    font-size: 0.72rem;
+    margin-top: 0.2rem;
+}
+
+.gzNohf .brand-logo {
+    cursor: pointer;
+    margin-bottom: 0.3rem;
+}
+
+.gzNohf .hamburger {
+    width: 1.5rem;
+    height: 2rem;
+    display: flex;
+    flex-direction: column;
+    margin-right: 2rem;
+    cursor: pointer;
+    margin-top: 0.4rem;
+}
+
+.gzNohf .hamburger>span {
+    border-bottom: 2px solid rgb(255, 255, 255);
+    display: block;
+    margin-top: 0.3rem;
+}
+
+.bybQpK {
+    background-color: rgb(34, 46, 58);
+}
+
+.bybQpK .ftr-wrpr {
+    padding: 3rem 3rem 1rem;
+    display: flex;
+    flex-direction: row;
+    color: rgb(131, 154, 177);
+}
+
+.bybQpK .ftr-lft {
+    width: 65%;
+}
+
+.bybQpK .ftr-img img {
+    width: 17rem;
+}
+
+.bybQpK .ftr-rgt {
+    width: 30%;
+    font-size: 1.25rem;
+    margin-left: 9.5rem;
+}
+
+.bybQpK .ftr-rgt .icn {
+    margin-top: 1.28rem;
+    display: flex;
+}
+
+.bybQpK .ftr-rgt .icn img:nth-child(2) {
+    margin-left: 2rem;
+}
+
+.bybQpK .ftr-rgt .icn img {
+    width: 8.6rem;
+    height: 2.5rem;
+    cursor: pointer;
+}
+
+.bybQpK .ftr-cntnt {
+    display: flex;
+    flex-direction: row;
+    margin-top: 2rem;
+}
+
+.bybQpK .ftr-lnk {
+    color: white;
+    font-size: 0.87rem;
+    margin-left: 2.3rem;
+}
+
+.bybQpK .ftr-lnk:first-child {
+    margin-left: 0rem;
+}
+
+.bybQpK .ftr-lnk>li {
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+.bybQpK .lst-hdr {
+    color: rgb(131, 154, 177);
+    font-size: 1rem;
+}
+
+.bybQpK .copyright {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding: 1.4em;
+    border-top: 1px dotted rgb(82, 98, 116);
+    background: rgb(26, 39, 53);
+    color: rgb(92, 111, 131);
+}
+
+.dGWbVR {
+    min-width: 320px;
+}
+
+.koYlGG {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    padding: 0.3rem 3rem 0rem;
+    flex-flow: row nowrap;
+    right: 0px;
+    left: 0px;
+    width: auto;
+    background-color: rgb(255, 255, 255);
+    overflow-x: auto;
+    height: 2.4em;
+    position: fixed;
+    z-index: 90;
+    margin-top: -3em;
+}
+
+.koYlGG .mn-hdr {
+    white-space: nowrap;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    margin-top: 1.1em;
+    font-size: 0.75em;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.koYlGG .active {
+    border-bottom: 0.3em solid rgb(101, 171, 11);
+    padding-bottom: 1.3em;
+    color: rgb(82, 137, 166);
+}
+
+.koYlGG .hide {
+    border-bottom: none;
+    color: rgb(180, 191, 196);
+}
+
+.cyexOc {
+    display: flex;
+}
+
+.cyexOc .cnt {
+    position: relative;
+    min-height: 28rem;
+    max-height: 80vh;
+    width: 20rem;
+    background: rgb(255, 255, 255);
+    overflow-y: auto;
+    transition: all 1s ease 0s;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 2px 2px 0px, rgba(0, 0, 0, 0.12) 0px 2px 4px 0px;
+}
+
+.hsNHCS {
+    margin-top: 6em;
+}
+
+.hsNHCS .menu-cnt {
+    display: flex;
+    margin: auto;
+    overflow: auto;
+    padding: 3rem 6rem 3rem 3rem;
+}
+
+.hsNHCS .menu-left {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2%;
+    flex: 3 1 0%;
+    margin-right: -3rem;
+}
+
+.hsNHCS .cat-bar {
+    background: rgb(255, 255, 255);
+    border-radius: 2rem;
+    display: inline-flex;
+    -webkit-box-align: center;
+    align-items: center;
+    padding: 1rem 2rem;
+    margin: 0px 0px 1rem 1.5rem;
+}
+
+.hsNHCS .edv-reg {
+    cursor: pointer;
+    background-image: url(https://pizzaonline.dominos.co.in/static/assets/edv_regular@3x.png);
+}
+
+.hsNHCS .edv-med {
+    cursor: pointer;
+    background-image: url(https://pizzaonline.dominos.co.in/static/assets/edv_medium@3x.png);
+}
+
+.hsNHCS .tp-banner {
+    display: flex;
+    margin-bottom: 1rem;
+    width: 97%;
+}
+
+.hsNHCS .tp-banner>div {
+    background-size: 100% 100%;
+    width: 45%;
+    height: 8rem;
+    margin-right: 2rem;
+    margin-left: -0.5rem;
+    margin-bottom: 1rem;
+}
+
+.hsNHCS .menu-right {
+    flex: 1 1 0%;
+}
+
+.hsNHCS .menu-right>div {
+    position: fixed;
+    margin-right: 7rem;
+}
+
+.hsNHCS .menu-catname {
+    width: 100%;
+}
+
+.hsNHCS .menu-hr {
+    border-bottom: 1px solid rgb(210, 210, 210);
+    position: relative;
+    width: 87%;
+    top: 1.5rem;
+    z-index: -1;
+}
+
+.hsNHCS .rd-colr {
+    color: rgb(255, 0, 0);
+}
+
+.hsNHCS .gr-colr {
+    color: rgb(31, 179, 26);
+}
+
+.hsNHCS .opa-0 {
+    opacity: 0;
+}
+
+.hsNHCS .div-hide {
+    display: none;
+}
+
+.iVyrGi {
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0px 1rem;
+}
+
+.iVyrGi .text__wrpr {
+    -webkit-box-align: center;
+    align-items: center;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin-top: 1rem;
+}
+
+.iVyrGi .text__1 {
+    font-size: 1.5rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: rgb(113, 128, 145);
+    width: 100%;
+}
+
+.iVyrGi .text__2 {
+    font-size: 1rem;
+    color: rgb(105, 129, 158);
+    padding-top: 0.2rem;
+    width: 100%;
+}
+
+.iVyrGi img {
+    position: absolute;
+    top: 0rem;
+    right: 0rem;
+}
+
+.iVyrGi .text__wrpr {
+    margin-top: 14rem;
+}
+
+.EXOv {
+    position: relative;
+    margin-top: 0px;
+    height: 80%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.bpeKpG {
+    min-width: 0px;
+    position: relative;
+    overflow: hidden;
+}
+
+.bpeKpG img {
+    max-width: 100%;
+    max-height: 450rem;
+    border-radius: 3px 3px 0px 0px;
+}
+
+.bpeKpG .img-wrpr__img-txt {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: rgb(255, 255, 255);
+    position: absolute;
+    top: 6.1rem;
+    left: 0.6rem;
+}
+
+.bpeKpG .img-wrpr__fav {
+    font-size: 5rem;
+    position: absolute;
+    top: 0.5rem;
+    right: 0.6rem;
+}
+
+.bpeKpG .img-wrpr__typ {
+    font-size: 2rem;
+    position: absolute;
+    top: 0.5rem;
+    left: 0.6rem;
+}
+
+.bpeKpG .img-cvr {
+    height: 8.5rem;
+    width: 100%;
+}
+
+.bpeKpG .img-cvr img {
+    width: 100%;
+    height: 100%;
+}
+
+.gxpZXT {
+    flex-basis: auto;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0.8rem;
+}
+
+.gxpZXT .itm-nm-dsc {
+    height: 5rem;
+    border-bottom: 1px solid rgb(233, 233, 233);
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.gxpZXT .brd-0 {
+    border-bottom: 0px;
+}
+
+.gxpZXT .itm-dsc__nm {
+    flex-basis: auto;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.gxpZXT .itm-dsc__dscrptn {
+    flex-basis: auto;
+    line-height: 1.2;
+    font-size: 0.875rem;
+    color: rgba(122, 122, 122, 0.87);
+    margin-top: 0.5rem;
+    width: 90%;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.gxpZXT .sz-ln {
+    border-bottom: 0.1rem solid rgb(233, 233, 233);
+}
+
+.gxpZXT .itm-dsc__actn {
+    flex-basis: auto;
+    flex-flow: row nowrap;
+    display: flex;
+    margin-top: 0.4rem;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.gxpZXT .sz-hr {
+    margin-top: 0.4rem;
+    width: 4rem;
+}
+
+.gxpZXT .drp-dwn-crst-hr {
+    margin-top: 0.1rem;
+    width: 100%;
+}
+
+.gxpZXT .itm-dsc__actn__sz {
+    flex-flow: column nowrap;
+    width: 40%;
+}
+
+.gxpZXT .itm-dsc__actn__sz__nm {
+    width: 1.3rem;
+    height: 0.81rem;
+    font-size: 0.69rem;
+    color: rgba(122, 122, 122, 0.87);
+    margin-bottom: 0.2rem;
+}
+
+.gxpZXT .itm-dsc__actn__sz__nm_sz {
+    font-size: 11px;
+    color: rgb(53, 53, 53);
+    font-weight: 600;
+}
+
+.gxpZXT .itm-dsc__actn__crst {
+    flex-flow: column nowrap;
+    margin-left: 1rem;
+    width: 60%;
+}
+
+.gxpZXT .itm-dsc__actn__crst__nm {
+    width: 1.3rem;
+    height: 0.81rem;
+    font-size: 0.69rem;
+    color: rgba(122, 122, 122, 0.87);
+    margin-bottom: 0.2rem;
+}
+
+.gxpZXT .itm-dsc__actn__adCrt {
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    margin-top: 0.5rem;
+    position: relative;
+}
+
+.bBOoLd .itm-wrppr {
+    width: 27%;
+    margin-right: 3rem;
+    margin-bottom: 3rem;
+}
+
+/*! CSS Used fontfaces */
+
+@font-face {
+    font-family: proxima-nova;
+    font-display: auto;
+    src: url(https://pizzaonline.dominos.co.in/static/fonts/PnReg.woff) format("opentype");
+}
+
+@font-face {
+    font-family: proxima-nova;
+    font-display: auto;
+    src: url(https://pizzaonline.dominos.co.in/static/fonts/PnSB.woff) format("truetype");
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: proxima-nova;
+    font-display: auto;
+    src: url(https://pizzaonline.dominos.co.in/static/fonts/PnB.woff) format("truetype");
+    font-weight: 900;
+}
