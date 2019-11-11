@@ -1,9 +1,11 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from flask_pymongo import PyMongo
 from pymongo import MongoClient
 import pymongo
 
 app = Flask(__name__)
+api = CORS(app)
 
 client = MongoClient('mongodb://localhost:27017/')
 db = client.PizzaDB
@@ -46,7 +48,7 @@ def remove_user(username):
     if(q['n'] == 0):
         print("Bad Request: Remove User")
         return jsonify({}),400
-    else: 
+    else:
         print("User:", username,"deleted")
         q = details.remove({'username' : username})
         return jsonify({}),200
@@ -114,5 +116,5 @@ def add_user_details(username):
 
 if __name__=='__main__':
 	app.run(debug = True,host = "0.0.0.0", port = "5000")
-        
+
 

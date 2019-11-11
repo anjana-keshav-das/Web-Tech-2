@@ -27,6 +27,68 @@
 	<link rel="stylesheet" type="text/css" href="css/util.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<!--===============================================================================================-->
+</head>
+
+<body>
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('images/bg-01.png');">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form">
+					<span class="login100-form-logo">
+						<i class="zmdi zmdi-landscape"></i>
+					</span>
+					<span class="login100-form-title p-b-34 p-t-27">
+						Log in
+					</span>
+					<div class="wrap-input100 validate-input" data-validate="Enter username">
+						<input class="input100" id="username" type="text" name="username" placeholder="Username">
+						<span class="focus-input100" data-placeholder="&#xf207;"></span>
+					</div>
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<input class="input100" id="password" type="password" name="pass" placeholder="Password">
+						<span class="focus-input100" data-placeholder="&#xf191;"></span>
+					</div>
+					<div class="contact100-form-checkbox">
+						<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+						<label class="label-checkbox100" for="ckb1">
+							Remember me
+						</label>
+					</div>
+					<div class="container-login100-form-btn">
+						<button id="login" class="login100-form-btn">
+							Login
+						</button>
+					</div>
+					<div class="text-center p-t-90">
+						<a class="txt1" href="signup.html">
+							Sign Up!
+						</a>
+						</br></br>
+						<a class="txt1" href="#">
+							Forgot Password?
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div id="dropDownSelect1"></div>
+	<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="vendor/animsition/js/animsition.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+	<!--===============================================================================================-->
+	<script src="vendor/daterangepicker/moment.min.js"></script>
+	<script src="vendor/daterangepicker/daterangepicker.js"></script>
+	<!--===============================================================================================-->
+	<script src="vendor/countdowntime/countdowntime.js"></script>
+	<!--===============================================================================================-->
+	<script src="js/main.js"></script>
 	<script>
 		function SHA1(msg) {
 			function rotate_left(n, s) {
@@ -34,7 +96,7 @@
 				return t4;
 			};
 			function lsb_hex(val) {
-				var str = "";
+				var str = '';
 				var i;
 				var vh;
 				var vl;
@@ -44,9 +106,12 @@
 					str += vh.toString(16) + vl.toString(16);
 				}
 				return str;
+
+
+
 			};
 			function cvt_hex(val) {
-				var str = "";
+				var str = '';
 				var i;
 				var v;
 				for (i = 7; i >= 0; i--) {
@@ -56,8 +121,8 @@
 				return str;
 			};
 			function Utf8Encode(string) {
-				string = string.replace(/\r\n/g, "\n");
-				var utftext = "";
+				string = ("" + string).replace(/\r\n/g, '\n');
+				var utftext = '';
 				for (var n = 0; n < string.length; n++) {
 					var c = string.charCodeAt(n);
 					if (c < 128) {
@@ -158,90 +223,39 @@
 				H4 = (H4 + E) & 0x0ffffffff;
 			}
 			var temp = cvt_hex(H0) + cvt_hex(H1) + cvt_hex(H2) + cvt_hex(H3) + cvt_hex(H4);
+
 			return temp.toLowerCase();
 		}
 
 		var obj = {
 			xhr: new XMLHttpRequest,
-			Login: function () {
+			Login: function (e) {
+				e.preventDefault()
 				var username = document.getElementById("username");
-				this.xhr.onreadystatechange = this.verifyLogin;
-				this.xhr.open("GET", "http://0.0.0.0:5000/api/v1/users/" + username.innerHTML, true);
-				this.xhr.send();
+				obj.xhr.onreadystatechange = obj.verifyLogin;
+				obj.xhr.open("GET", "http://0.0.0.0:5000/api/v1/users/" + username.value, false);
+				obj.xhr.send();
 			},
 			verifyLogin: function () {
 				if (this.readyState == 4 && this.status == 200) {
 					var res = this.responseText;
 					var resJSON = JSON.parse(res);
-					console.log(resJSON)
+					var pass = document.getElementById("password")
+					pass = SHA1(pass)
+					console.log(pass)
+					if (pass == resJSON['password'])
+						alert("Login success!")
+					else
+						alert("Incorrect Password!")
+				}
+				else if (this.readyState == 4 && this.status == 200) {
+					alert("No such user!")
 				}
 			}
 		}
 		var login = document.getElementById("login");
-		login.addEventListener("click", obj.Login, true);
+		document.addEventListener("submit", obj.Login, true);
 	</script>
-</head>
-
-<body>
-	<div class="limiter">
-		<div class="container-login100" style="background-image: url('images/bg-01.png');">
-			<div class="wrap-login100">
-				<form class="login100-form validate-form">
-					<span class="login100-form-logo">
-						<i class="zmdi zmdi-landscape"></i>
-					</span>
-					<span class="login100-form-title p-b-34 p-t-27">
-						Log in
-					</span>
-					<div class="wrap-input100 validate-input" data-validate="Enter username">
-						<input class="input100" id="username" type="text" name="username" placeholder="Username">
-						<span class="focus-input100" data-placeholder="&#xf207;"></span>
-					</div>
-					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<input class="input100" id="password" type="password" name="pass" placeholder="Password">
-						<span class="focus-input100" data-placeholder="&#xf191;"></span>
-					</div>
-					<div class="contact100-form-checkbox">
-						<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-						<label class="label-checkbox100" for="ckb1">
-							Remember me
-						</label>
-					</div>
-					<div class="container-login100-form-btn">
-						<button id="login" class="login100-form-btn">
-							Login
-						</button>
-					</div>
-					<div class="text-center p-t-90">
-						<a class="txt1" href="signup.html">
-							Sign Up!
-						</a>
-						</br></br>
-						<a class="txt1" href="#">
-							Forgot Password?
-						</a>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	<div id="dropDownSelect1"></div>
-	<!--===============================================================================================-->
-	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-	<!--===============================================================================================-->
-	<script src="vendor/animsition/js/animsition.min.js"></script>
-	<!--===============================================================================================-->
-	<script src="vendor/bootstrap/js/popper.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-	<!--===============================================================================================-->
-	<script src="vendor/select2/select2.min.js"></script>
-	<!--===============================================================================================-->
-	<script src="vendor/daterangepicker/moment.min.js"></script>
-	<script src="vendor/daterangepicker/daterangepicker.js"></script>
-	<!--===============================================================================================-->
-	<script src="vendor/countdowntime/countdowntime.js"></script>
-	<!--===============================================================================================-->
-	<script src="js/main.js"></script>
 </body>
 
 </html>
