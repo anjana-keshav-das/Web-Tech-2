@@ -8,6 +8,11 @@ app = Flask(__name__)
 client = MongoClient('mongodb://localhost:27017/')
 db = client.PizzaDB
 
+order_no = 0
+
+def make_payment(username, amount):
+    return 1
+
 # Get full menu or category based
 @app.route("/api/v1/menu", methods=['GET'])
 @app.route("/api/v1/menu?category=<category>", methods=['GET'])
@@ -169,6 +174,32 @@ def add_item(username):
             else:
                 print("success")
                 return jsonify({}), 200
+
+#Place order and add to customer sale queue
+@app.route("/api/v1/menu/cart/buy/<username>", methods=['POST'])
+def place_order(username):
+    global order_no
+    cart = db.cart
+    prepare = db.prepare
+    q = cart.find_one({'username': username})
+    cost = q['total']
+    if (make_payment(username, cost)):
+        q = prepare.insert({'username': username, 'ordno': order_no})
+        order_no += 1
+        if (order_no > 50):
+            order_no = 0
+        return jsonify({}), 200
+    else:
+        return jsonify({}), 402
+
+#Order completed
+@app.route("/api/v1/menu/complete/<username>", methods=['POST'])
+def order_complete(username):
+    cart = db.cart
+    prepare = db.prepare
+    q = prepare.remove({'username': username})
+    q = cart.remove({'username': username})
+    return jsonify({}),200
 
 
 if __name__ == '__main__':
