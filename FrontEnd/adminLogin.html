@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Food Delivery System</title>
+    <title>Food Delivery - Admin</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--===============================================================================================-->
@@ -30,63 +30,46 @@
 </head>
 
 <body>
-
     <div class="limiter">
-        <div class="container-login100" style="background-image: url('images/bg-01.png');">
+        <div class="container-login100" style="background-image: url(images/bg-02.jpg);">
             <div class="wrap-login100">
                 <form class="login100-form validate-form">
                     <span class="login100-form-logo">
                         <i class="zmdi zmdi-landscape"></i>
                     </span>
-
                     <span class="login100-form-title p-b-34 p-t-27">
-                        Sign Up
+                        Log in
                     </span>
-
-                    <div class="wrap-input100 validate-input" data-validate="Enter Name">
-                        <input id="nm" class="input100" type="text" name="name" placeholder="Name">
-                        <span class="focus-input100" data-placeholder="&#xf207;"></span>
-                    </div>
-
                     <div class="wrap-input100 validate-input" data-validate="Enter username">
-                        <input id="username" class="input100" type="text" name="username" placeholder="Username">
+                        <input class="input100" id="username" type="text" name="username" placeholder="Administrator">
                         <span class="focus-input100" data-placeholder="&#xf207;"></span>
                     </div>
-
-                    <div class="wrap-input100 validate-input" data-validate="Enter Email">
-                        <input id="email" class="input100" type="email" name="email" placeholder="Email">
-                        <span class="focus-input100" data-placeholder="&#xf0e0;"></span>
-                    </div>
-
                     <div class="wrap-input100 validate-input" data-validate="Enter password">
-                        <input id="pass" class="input100" type="password" name="pass" placeholder="Enter Password">
+                        <input class="input100" id="password" type="password" name="pass" placeholder="Password">
                         <span class="focus-input100" data-placeholder="&#xf191;"></span>
                     </div>
-                    <div class="wrap-input100 validate-input" data-validate="Confirm password">
-                        <input id="confPass" class="input100" type="password" name="pass"
-                            placeholder="Confirm Password">
-                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                    <div class="contact100-form-checkbox">
+                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                        <label class="label-checkbox100" for="ckb1">
+                            Remember me
+                        </label>
                     </div>
-
                     <div class="container-login100-form-btn">
-                        <button id="signup" class="login100-form-btn">
-                            Sign Up
+                        <button id="login" class="login100-form-btn">
+                            Login
                         </button>
                     </div>
-
                     <div class="text-center p-t-90">
-                        <a class="txt1" href="index.html">
-                            Login!
+                        </br>
+                        <a class="txt1" href="#">
+                            Forgot Password?
                         </a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-
-
     <div id="dropDownSelect1"></div>
-
     <!--===============================================================================================-->
     <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
     <!--===============================================================================================-->
@@ -103,7 +86,6 @@
     <script src="vendor/countdowntime/countdowntime.js"></script>
     <!--===============================================================================================-->
     <script src="js/main.js"></script>
-
     <script>
         function SHA1(msg) {
             function rotate_left(n, s) {
@@ -242,70 +224,35 @@
             return temp.toLowerCase();
         }
 
-        var username = document.getElementById("username");
-        var pass = document.getElementById("pass");
-        var confPass = document.getElementById("confPass");
-        var nm = document.getElementById("nm");
-        var email = document.getElementById("email");
-
         var obj = {
             xhr: new XMLHttpRequest,
-            SignUp: function (e) {
+            Login: function (e) {
                 e.preventDefault()
-                if (pass.value == confPass.value) {
-                    obj.xhr.onreadystatechange = obj.addDetails;
-                    obj.xhr.open("POST", "http://0.0.0.0:5000/api/v1/users", false);
-                    obj.xhr.setRequestHeader("Content-Type", "application/json");
-                    data = {
-                        "username": username.value,
-                        "password": SHA1(pass.value)
-                    }
-
-                    data = JSON.stringify(data)
-                    obj.xhr.send(data);
-                }
-                else {
-                    alert("Passwords do not match!");
-                }
+                var username = document.getElementById("username");
+                obj.xhr.onreadystatechange = obj.verifyLogin;
+                obj.xhr.open("GET", "http://0.0.0.0:5000/api/v1/admin/" + username.value, false);
+                obj.xhr.setRequestHeader("Content-Type", "application/json");
+                obj.xhr.send();
             },
-            addDetails: function () {
-                if (this.readyState == 4 && this.status == 201) {
-                    obj.xhr.onreadystatechange = obj.success;
-                    obj.xhr.open("POST", "http://0.0.0.0:5000/api/v1/users/" + username.value, false);
-                    obj.xhr.setRequestHeader("Content-Type", "application/json");
-                    console.log(nm.value)
-                    console.log(email)
-                    data = { 'contact': "", 'name': nm.value, 'address': "", 'email': email.value }
-                    data = JSON.stringify(data);
-                    console.log(data)
-                    obj.xhr.send(data);
+            verifyLogin: function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var res = this.responseText;
+                    var resJSON = JSON.parse(res);
+                    var pass = document.getElementById("password")
+                    pass = SHA1(pass.value)
+                    if (pass == resJSON['password'])
+                        window.location.replace("http://192.168.64.2/WebTech/FrontEnd/admin.html")
+                    else
+                        alert("Incorrect Password!")
                 }
-                else if (this.readyState == 4 && this.status == 400) {
-                    alert("Username exists!");
-                }
-            },
-            success: function () {
-                if (this.readyState == 4 && this.status == 201) {
-                    alert("User Created! Go to login page to login!");
-                }
-                else if (this.readyState == 4 && this.status == 400) {
-                    obj.xhr.onreadystatechange = obj.failure;
-                    obj.xhr.open("DELETE", "http://0.0.0.0:5000/api/v1/users" / + username.value, false);
-                    obj.xhr.setRequestHeader("Content-Type", "application/json");
-                    obj.xhr.send();
-                }
-            },
-            failure: function () {
-                if (this.readyState == 4) {
-                    console.log(this.status);
-                    alert("Creation failed! Try again!");
+                else if (this.readyState == 4 && this.status == 200) {
+                    alert("No such user!")
                 }
             }
         }
-        var signup = document.getElementById("signup");
-        document.addEventListener("submit", obj.SignUp, true);
+        var login = document.getElementById("login");
+        document.addEventListener("submit", obj.Login, true);
     </script>
-
 </body>
 
 </html>

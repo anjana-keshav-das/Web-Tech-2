@@ -143,5 +143,43 @@ def add_user_details(username):
             return jsonify({}), 400
 
 
+#Admin Login
+@app.route("/api/v1/admin/<username>", methods=['GET'])
+def get_admin(username):
+    admin = db.admin
+    q = admin.find_one({'username': username})
+    if (q == None):
+        print("Bad Request: Get User")
+        return jsonify({}), 400
+    else:
+        print("User found")
+        return jsonify({
+            'username': q['username'],
+            'password': q['password']
+        }), 200
+
+
+# Add Admin
+@app.route("/api/v1/admin", methods=['POST'])
+def add_admin():
+    admin = db.admin
+    q = admin.find_one({'username': request.json['username']})
+    if q != None:
+        print("User exisits")
+        return jsonify({}), 400
+    else:
+        if is_sha1(request.json['password']):
+            output = {
+                'username': request.json['username'],
+                'password': request.json['password']
+            }
+            q = admin.insert(output)
+            print(output, ": User inserted")
+            return jsonify({}), 201
+        else:
+            print("Bad Request: Add User")
+            return jsonify({}), 400
+
+
 if __name__ == '__main__':
     app.run(debug=True, host="0.0.0.0", port="5000")

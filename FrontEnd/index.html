@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-	<title>Login V3</title>
+	<title>Food Delivery - User</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--===============================================================================================-->
@@ -63,9 +63,13 @@
 						<a class="txt1" href="signup.html">
 							Sign Up!
 						</a>
-						</br></br>
+						</br>
 						<a class="txt1" href="#">
 							Forgot Password?
+						</a>
+						</br>
+						<a class="txt1" href="adminLogin.html">
+							Not a customer? Click here
 						</a>
 					</div>
 				</form>
@@ -234,6 +238,7 @@
 				var username = document.getElementById("username");
 				obj.xhr.onreadystatechange = obj.verifyLogin;
 				obj.xhr.open("GET", "http://0.0.0.0:5000/api/v1/users/" + username.value, false);
+				obj.xhr.setRequestHeader("Content-Type", "application/json");
 				obj.xhr.send();
 			},
 			verifyLogin: function () {
@@ -241,8 +246,7 @@
 					var res = this.responseText;
 					var resJSON = JSON.parse(res);
 					var pass = document.getElementById("password")
-					pass = SHA1(pass)
-					console.log(pass)
+					pass = SHA1(pass.value)
 					if (pass == resJSON['password'])
 						alert("Login success!")
 					else
