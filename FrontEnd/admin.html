@@ -46,83 +46,9 @@
     <div class="limiter">
         <div id="container" class="container-login100"
             style="background-image: url('images/bg-02.jpg');padding-top: 50px;">
-            <!-- <div class="wrap-login100" style="width: 1200px; margin-top: 50px;">
-                <span class="login100-form-title p-b-34 p-t-27">
-                    No orders right now!
-                </span>
-            </div> -->
-            <div class="row" style="margin: 50px 50px 50px 50px; width: 1200px">
-                <div class="wrap-login100 col-5" style="width: 500px;">
-                    <span class=" login100-form-title p-b-0 p-t-10" style="text-align: left;">
-                        Order number: 1
-                    </span>
-                    <div class="text-center p-t-20">
-                        <div class="txt1" style="text-align:left; font-size: 20px;">
-                            Name: Testing
-                        </div>
-                        </br>
-                        <div class="txt1" style="text-align:left; font-size: 20px;">
-                            Items:
-                            </br>
-                            <div class="txt1 col-6" style="font-size: 17px; margin-bottom: 0px;">
-                                Item + Topping
-                            </div>
-                            <div class="txt1 col-6" style="font-size: 17px; margin-bottom: 0px;">
-                                Item + Topping
-                            </div>
-                        </div>
-                        </br>
-                        <div class="txt1" style="text-align:left; font-size: 20px; padding-bottom: 10px;">
-                            Address: ajkslasdhljashdlasdkjhjkshdlkjhdlkjahkjdhs
-                        </div>
-                        <div class="row align-items-stretch col-2">
-                            <div class="btn-group mr-2" role="group" aria-label="First group">
-                                <button type="button" class="btn btn-secondary btn-danger">
-                                    Recieved </button>
-                                <button type="button" class="btn btn-secondary btn-danger">Preparing</button>
-                                <button type="button" class="btn btn-secondary btn-danger">Delivery</span></button>
-                                <button type="button" class="btn btn-secondary btn-danger">Complete</span></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-2"></div>
-                <div class="wrap-login100 col-5">
-                    <span class="login100-form-title p-b-0 p-t-10" style="text-align: left;">
-                        Order number: 1
-                    </span>
-                    <div class="text-center p-t-20">
-                        <div class="txt1" style="text-align:left; font-size: 20px;">
-                            Name: Testing
-                        </div>
-                        </br>
-                        <div class="txt1" style="text-align:left; font-size: 20px;">
-                            Items:
-                            </br>
-                            <div class="txt1 col-6" style="font-size: 17px; margin-bottom: 0px;">
-                                Item + Topping
-                            </div>
-                            <div class="txt1 col-6" style="font-size: 17px; margin-bottom: 0px;">
-                                Item + Topping
-                            </div>
-                        </div>
-                        </br>
-                        <div class="txt1" style="text-align:left; font-size: 20px; padding-bottom: 10px;">
-                            Address: ajkslasdhljashdlasdkjhjkshdlkjhdlkjahkjdhs
-                        </div>
-                        <div class="row align-items-stretch col-2">
-                            <div class="btn-group mr-2" role="group" aria-label="First group">
-                                <button type="button" class="btn btn-secondary btn-danger">
-                                    Recieved </button>
-                                <button type="button" class="btn btn-secondary btn-danger">Preparing</button>
-                                <button type="button" class="btn btn-secondary btn-danger">Delivery</span></button>
-                                <button type="button" class="btn btn-secondary btn-danger">Complete</span></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
+    </div>
+    </div>
     </div>
     <div id="dropDownSelect1"></div>
     <!--===============================================================================================-->
@@ -157,24 +83,31 @@
                     var res = this.responseText;
                     var resJSON = JSON.parse(res);
                     for (i = 0; i < resJSON.length; i++) {
-                        obj.xhr.onreadystatechange = function () { obj.buildView(resJSON[i]['username'], resJSON[i]["ordno"], resJSON[i]["received"], resJSON[i]["preparing"], resJSON[i]["delivery"]); };
-                        obj.xhr.open("GET", "http://0.0.0.0:5000/api/v1/menu/cart/" + resJSON[i]['username'], false);
-                        obj.xhr.setRequestHeader("Content-Type", "application/json");
-                        obj.xhr.send();
+                        xhr1 = new XMLHttpRequest()
+                        xhr1.onreadystatechange = function () { obj.buildView(xhr1, resJSON[i]['username'], resJSON[i]["ordno"], resJSON[i]["received"], resJSON[i]["preparing"], resJSON[i]["delivery"]); };
+                        xhr1.open("GET", "http://0.0.0.0:5000/api/v1/menu/cart/" + resJSON[i]['username'], false);
+                        xhr1.setRequestHeader("Content-Type", "application/json");
+                        xhr1.send();
                     }
                 }
                 else if (this.readyState == 4 && this.status == 204) {
-                    console.log("No content")
+                    div = document.getElementById("container");
+                    div.innerHTML = `
+                    <div class="wrap-login100" style="width: 1200px; margin-top: 50px;">
+                        <span class="login100-form-title p-b-34 p-t-27">
+                            No orders right now!
+                        </span>
+                    </div>`
                 }
             },
-            buildView: function (username, ordno, receive, prepare, deliver) {
-                if (obj.xhr.readyState == 4 && obj.xhr.status == 200) {
-                    var res = obj.xhr.responseText;
+            buildView: function (xhr, username, ordno, receive, prepare, deliver) {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var res = xhr.responseText;
                     var resJSON = JSON.parse(res);
                     if (obj.row == 0) {
                         var div = document.getElementById("container")
                         obj.rowDiv = document.createElement("div");
-                        obj.rowDiv.class = "row";
+                        obj.rowDiv.classList.add("row");
                         obj.rowDiv.style = "margin: 50px 50px 50px 50px; width: 1200px";
                         item_list = ``
                         for (var i = 0; i < resJSON['items'].length; i++) {
@@ -189,38 +122,120 @@
                                         </div>`
                         }
                         buttonList = ``
+                        if (receive == 0) {
+                            buttonList = buttonList + `<button id="recieve" type="button" class="btn btn-secondary btn-danger">Recieved </button>`
+                        }
+                        else {
+                            buttonList = buttonList + `<button type="button" class="btn btn-secondary btn-success">Recieved </button>`
+                        }
+                        if (prepare == 0) {
+                            buttonList = buttonList + `<button id="prepare" type="button" class="btn btn-secondary btn-danger">Preparing </button>`
+                        }
+                        else {
+                            buttonList = buttonList + `<button type="button" class="btn btn-secondary btn-success">Preparing </button>`
+                        }
+                        if (deliver == 0) {
+                            buttonList = buttonList + `<button id="deliver" type="button" class="btn btn-secondary btn-danger">Delivery </button>`
+                        }
+                        else {
+                            buttonList = buttonList + `<button type="button" class="btn btn-secondary btn-success">Delivery </button>`
+                        }
 
                         obj.rowDiv.innerHTML = `
-                                <div class="wrap-login100 col-5">
+                                <div class="wrap-login100 col-5" style = >
                                     <span class="login100-form-title p-b-0 p-t-10" style="text-align: left;">
                                         Order number: ${ordno}
                                     </span>
-                                <div class="text-center p-t-20">
-                                    <div class="txt1" style="text-align:left; font-size: 20px;">
-                                        Name: ${username}
-                                    </div>
-                                    </br>
-                                    <div class="txt1" style="text-align:left; font-size: 20px;">
-                                        Items:
+                                    <div class="text-center p-t-20">
+                                        <div class="txt1" style="text-align:left; font-size: 20px;">
+                                            Name: ${username}
+                                        </div>
                                         </br>
-                                        ${item_list}
+                                        <div class="txt1" style="text-align:left; font-size: 20px;">
+                                            Items:
+                                            </br>
+                                            ${item_list}
+                                        </div>
+                                        </br>
+                                        <div class="txt1" style="text-align:left; font-size: 20px; padding-bottom: 10px;">
+                                            Address: ${resJSON['address']}
+                                        </div>
+                                        <div class="row align-items-stretch col-2">
+                                        <div class="btn-group mr-2" role="group" aria-label="First group">
+                                            ${buttonList}
+                                            <button id="complete "type="button" class="btn btn-secondary btn-danger">Complete</button>
+                                        </div>
                                     </div>
-                                    </br>
-                                    <div class="txt1" style="text-align:left; font-size: 20px; padding-bottom: 10px;">
-                                        Address: ${resJSON['address']}
-                                    </div>
-                                    <div class="row align-items-stretch col-2">
-                                    <div class="btn-group mr-2" role="group" aria-label="First group">
-                                        <button type="button" class="btn btn-secondary btn-danger">Recieved </button>
-                                        <button type="button" class="btn btn-secondary btn-danger">Preparing</button>
-                                        <button type="button" class="btn btn-secondary btn-danger">Delivery</span></button>
-                                        <button type="button" class="btn btn-secondary btn-danger">Complete</span></button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-2"></div>`;
+                                </div>`;
+                        div2 = document.createElement("div");
+                        div2.classList.add("col-2")
+                        obj.rowDiv.appendChild(div2)
                         div.append(obj.rowDiv)
                         obj.row = 1
+                    }
+                    else {
+                        item_list = ``
+                        for (var i = 0; i < resJSON['items'].length; i++) {
+                            if (resJSON['items'][i]['toppings'] == undefined) {
+                                temp = `${resJSON['items'][i]['name']}`
+                            }
+                            else {
+                                temp = `${resJSON['items'][i]['name']} + ${resJSON['items'][i]['toppings']}`
+                            }
+                            item_list = item_list + `<div class="txt1 col-6" style="font-size: 17px; margin-bottom: 0px;">
+                                            ${temp}
+                                        </div>`
+                        }
+                        buttonList = ``
+                        if (receive == 0) {
+                            buttonList = buttonList + `<button id="recieve" type="button" class="btn btn-secondary btn-danger">Recieved </button>`
+                        }
+                        else {
+                            buttonList = buttonList + `<button type="button" class="btn btn-secondary btn-success">Recieved </button>`
+                        }
+                        if (prepare == 0) {
+                            buttonList = buttonList + `<button id="prepare" type="button" class="btn btn-secondary btn-danger">Preparing </button>`
+                        }
+                        else {
+                            buttonList = buttonList + `<button type="button" class="btn btn-secondary btn-success">Preparing </button>`
+                        }
+                        if (deliver == 0) {
+                            buttonList = buttonList + `<button id="deliver" type="button" class="btn btn-secondary btn-danger">Delivery </button>`
+                        }
+                        else {
+                            buttonList = buttonList + `<button type="button" class="btn btn-secondary btn-success">Delivery </button>`
+                        }
+
+                        div = document.createElement("div")
+                        div.classList.add("wrap-login100", "col-5")
+
+                        div.innerHTML = `
+                            <span class="login100-form-title p-b-0 p-t-10" style="text-align: left;">
+                                Order number: ${ordno}
+                            </span>
+                            <div class="text-center p-t-20">
+                                <div class="txt1" style="text-align:left; font-size: 20px;">
+                                    Name: ${username}
+                                </div>
+                                </br>
+                                <div class="txt1" style="text-align:left; font-size: 20px;">
+                                    Items:
+                                    </br>
+                                        ${item_list}
+                                </div>
+                                </br>
+                                <div class="txt1" style="text-align:left; font-size: 20px; padding-bottom: 10px;">
+                                    Address: ${resJSON['address']}
+                                </div>
+                                <div class="row align-items-stretch col-2">
+                                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                                        ${buttonList}
+                                        <button type="button" class="btn btn-secondary btn-danger">Complete</button>
+                                    </div>
+                                </div>
+                            </div>`
+                        obj.rowDiv.appendChild(div)
+                        obj.row = 0
                     }
 
                 }
