@@ -32,6 +32,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <!--===============================================================================================-->
+    <script>
+        if (document.cookie.indexOf('username=') == -1)
+            location.replace("http://192.168.64.2/WebTech/FrontEnd/adminLogin.html")
+    </script>
 </head>
 
 <body>
@@ -39,7 +43,7 @@
         <a class="navbar-brand" href="#">Food Delivery</a>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link"><i class="fa fa-sign-out" aria-hidden="true"></i>Log-Out</a>
+                <a class="nav-link" id="signout"><i class="fa fa-sign-out" aria-hidden="true"></i>Log-Out</a>
             </li>
         </ul>
     </nav>
@@ -277,6 +281,12 @@
         }
         window.addEventListener("load", obj.getOrders, false)
         setInterval(obj.getOrders, 5000);
+
+        function signout() {
+            document.cookie = 'username =;expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+            location.replace("http://192.168.64.2/WebTech/FrontEnd/adminLogin.html")
+        }
+        document.getElementById("signout").addEventListener("click", signout, false);
     </script>
 </body>
 
