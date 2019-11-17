@@ -44,15 +44,16 @@
         </ul>
     </nav>
     <div class="limiter">
-        <div class="container-login100" style="padding-top: 50px;">
+        <div id="container" class="container-login100"
+            style="background-image: url('images/bg-02.jpg');padding-top: 50px;">
             <!-- <div class="wrap-login100" style="width: 1200px; margin-top: 50px;">
                 <span class="login100-form-title p-b-34 p-t-27">
                     No orders right now!
                 </span>
             </div> -->
-            <div class="row" style="margin: 50px 50px 50px 50px;">
-                <div class="wrap-login100 col-5">
-                    <span class="login100-form-title p-b-0 p-t-10" style="text-align: left;">
+            <div class="row" style="margin: 50px 50px 50px 50px; width: 1200px">
+                <div class="wrap-login100 col-5" style="width: 500px;">
+                    <span class=" login100-form-title p-b-0 p-t-10" style="text-align: left;">
                         Order number: 1
                     </span>
                     <div class="text-center p-t-20">
@@ -80,6 +81,7 @@
                                     Recieved </button>
                                 <button type="button" class="btn btn-secondary btn-danger">Preparing</button>
                                 <button type="button" class="btn btn-secondary btn-danger">Delivery</span></button>
+                                <button type="button" class="btn btn-secondary btn-danger">Complete</span></button>
                             </div>
                         </div>
                     </div>
@@ -114,6 +116,7 @@
                                     Recieved </button>
                                 <button type="button" class="btn btn-secondary btn-danger">Preparing</button>
                                 <button type="button" class="btn btn-secondary btn-danger">Delivery</span></button>
+                                <button type="button" class="btn btn-secondary btn-danger">Complete</span></button>
                             </div>
                         </div>
                     </div>
@@ -138,6 +141,92 @@
     <script src="vendor/countdowntime/countdowntime.js"></script>
     <!--===============================================================================================-->
     <script src="js/main.js"></script>
+    <script>
+        var obj = {
+            row: 0,
+            rowDiv: 0,
+            xhr: new XMLHttpRequest(),
+            getOrders: function () {
+                obj.xhr.onreadystatechange = obj.getCarts;
+                obj.xhr.open("GET", "http://0.0.0.0:5000/api/v1/menu/prepare", false);
+                obj.xhr.setRequestHeader("Content-Type", "application/json");
+                obj.xhr.send();
+            },
+            getCarts: function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var res = this.responseText;
+                    var resJSON = JSON.parse(res);
+                    for (i = 0; i < resJSON.length; i++) {
+                        obj.xhr.onreadystatechange = function () { obj.buildView(resJSON[i]['username'], resJSON[i]["ordno"], resJSON[i]["received"], resJSON[i]["preparing"], resJSON[i]["delivery"]); };
+                        obj.xhr.open("GET", "http://0.0.0.0:5000/api/v1/menu/cart/" + resJSON[i]['username'], false);
+                        obj.xhr.setRequestHeader("Content-Type", "application/json");
+                        obj.xhr.send();
+                    }
+                }
+                else if (this.readyState == 4 && this.status == 204) {
+                    console.log("No content")
+                }
+            },
+            buildView: function (username, ordno, receive, prepare, deliver) {
+                if (obj.xhr.readyState == 4 && obj.xhr.status == 200) {
+                    var res = obj.xhr.responseText;
+                    var resJSON = JSON.parse(res);
+                    if (obj.row == 0) {
+                        var div = document.getElementById("container")
+                        obj.rowDiv = document.createElement("div");
+                        obj.rowDiv.class = "row";
+                        obj.rowDiv.style = "margin: 50px 50px 50px 50px; width: 1200px";
+                        item_list = ``
+                        for (var i = 0; i < resJSON['items'].length; i++) {
+                            if (resJSON['items'][i]['toppings'] == undefined) {
+                                temp = `${resJSON['items'][i]['name']}`
+                            }
+                            else {
+                                temp = `${resJSON['items'][i]['name']} + ${resJSON['items'][i]['toppings']}`
+                            }
+                            item_list = item_list + `<div class="txt1 col-6" style="font-size: 17px; margin-bottom: 0px;">
+                                            ${temp}
+                                        </div>`
+                        }
+                        buttonList = ``
+
+                        obj.rowDiv.innerHTML = `
+                                <div class="wrap-login100 col-5">
+                                    <span class="login100-form-title p-b-0 p-t-10" style="text-align: left;">
+                                        Order number: ${ordno}
+                                    </span>
+                                <div class="text-center p-t-20">
+                                    <div class="txt1" style="text-align:left; font-size: 20px;">
+                                        Name: ${username}
+                                    </div>
+                                    </br>
+                                    <div class="txt1" style="text-align:left; font-size: 20px;">
+                                        Items:
+                                        </br>
+                                        ${item_list}
+                                    </div>
+                                    </br>
+                                    <div class="txt1" style="text-align:left; font-size: 20px; padding-bottom: 10px;">
+                                        Address: ${resJSON['address']}
+                                    </div>
+                                    <div class="row align-items-stretch col-2">
+                                    <div class="btn-group mr-2" role="group" aria-label="First group">
+                                        <button type="button" class="btn btn-secondary btn-danger">Recieved </button>
+                                        <button type="button" class="btn btn-secondary btn-danger">Preparing</button>
+                                        <button type="button" class="btn btn-secondary btn-danger">Delivery</span></button>
+                                        <button type="button" class="btn btn-secondary btn-danger">Complete</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2"></div>`;
+                        div.append(obj.rowDiv)
+                        obj.row = 1
+                    }
+
+                }
+            }
+        }
+        window.addEventListener("load", obj.getOrders, false)
     </script>
 </body>
 
