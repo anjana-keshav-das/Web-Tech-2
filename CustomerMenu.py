@@ -4,6 +4,7 @@ from pymongo import MongoClient
 from flask_cors import CORS
 import pymongo
 import datetime
+import time
 
 app = Flask(__name__)
 CORS(app)
@@ -317,24 +318,24 @@ def update_progress(username):
 
 
 #get progress
-@app.route("/api/v1/<username>/progress", methods=['GET'])
+@app.route("/api/v1/<username>/progress", methods=['POST'])
 def get_progress(username):
-    tm = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    tm = request.json['time']
     prepare = db.prepare
     try:
-        q = prepare.find({"username": username})
+        q = prepare.find_one({"username": username})
         if (q['time'] != tm):
             output = {
                 "received": q['received'],
                 "preparing": q["preparing"],
-                "delivery": q["delivery"]
+                "delivery": q["delivery"],
+                "time": q['time']
             }
-
             return jsonify(output), 200
-        elif (q['time'] == tm):
+        else:
             return jsonify({}), 304
     except:
-        return jsonify({}), 204
+        return jsonify({}), 400
 
 
 #Order completed
@@ -348,4 +349,4 @@ def order_complete(username):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0", port="5000")
+    app.run(debug=True, host="0.0.0.0", port="5000", threaded=True)
