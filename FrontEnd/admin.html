@@ -48,8 +48,6 @@
             style="background-image: url('images/bg-02.jpg');padding-top: 50px;">
         </div>
     </div>
-    </div>
-    </div>
     <div id="dropDownSelect1"></div>
     <!--===============================================================================================-->
     <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
@@ -72,6 +70,7 @@
             row: 0,
             rowDiv: 0,
             xhr: new XMLHttpRequest(),
+            xhr2: new XMLHttpRequest(),
             getOrders: function () {
                 obj.xhr.onreadystatechange = obj.getCarts;
                 obj.xhr.open("GET", "http://0.0.0.0:5000/api/v1/menu/prepare", false);
@@ -83,11 +82,16 @@
                     var res = this.responseText;
                     var resJSON = JSON.parse(res);
                     for (i = 0; i < resJSON.length; i++) {
-                        xhr1 = new XMLHttpRequest()
-                        xhr1.onreadystatechange = function () { obj.buildView(xhr1, resJSON[i]['username'], resJSON[i]["ordno"], resJSON[i]["received"], resJSON[i]["preparing"], resJSON[i]["delivery"]); };
-                        xhr1.open("GET", "http://0.0.0.0:5000/api/v1/menu/cart/" + resJSON[i]['username'], false);
-                        xhr1.setRequestHeader("Content-Type", "application/json");
-                        xhr1.send();
+                        var div = document.getElementById("container")
+                        if (div.innerHTML.indexOf("No orders right now!") != -1)
+                            div.innerHTML = ``
+                        else if (div.innerHTML.indexOf(resJSON[i]['username']) == -1) {
+                            xhr1 = new XMLHttpRequest()
+                            xhr1.onreadystatechange = function () { obj.buildView(xhr1, resJSON[i]['username'], resJSON[i]["ordno"], resJSON[i]["received"], resJSON[i]["preparing"], resJSON[i]["delivery"]); };
+                            xhr1.open("GET", "http://0.0.0.0:5000/api/v1/menu/cart/" + resJSON[i]['username'], false);
+                            xhr1.setRequestHeader("Content-Type", "application/json");
+                            xhr1.send();
+                        }
                     }
                 }
                 else if (this.readyState == 4 && this.status == 204) {
@@ -123,10 +127,10 @@
                         }
                         buttonList = ``
                         if (receive == 0) {
-                            buttonList = buttonList + `<button type="button" class="btn btn-secondary btn-danger">Recieved </button>`
+                            buttonList = buttonList + `<button type="button" class="btn btn-secondary btn-danger">Received </button>`
                         }
                         else {
-                            buttonList = buttonList + `<button type="button" class="btn btn-secondary btn-success">Recieved </button>`
+                            buttonList = buttonList + `<button type="button" class="btn btn-secondary btn-success">Received </button>`
                         }
                         if (prepare == 0) {
                             buttonList = buttonList + `<button type="button" class="btn btn-secondary btn-danger">Preparing </button>`
@@ -142,7 +146,7 @@
                         }
 
                         obj.rowDiv.innerHTML = `
-                                <div class="wrap-login100 col-5" style = >
+                                <div class="wrap-login100 col-5">
                                     <span class="login100-form-title p-b-0 p-t-10" style="text-align: left;">
                                         Order number: ${ordno}
                                     </span>
@@ -188,10 +192,10 @@
                         }
                         buttonList = ``
                         if (receive == 0) {
-                            buttonList = buttonList + `<button type="button" class="btn btn-secondary btn-danger">Recieved </button>`
+                            buttonList = buttonList + `<button type="button" class="btn btn-secondary btn-danger">Received </button>`
                         }
                         else {
-                            buttonList = buttonList + `<button type="button" class="btn btn-secondary btn-success">Recieved </button>`
+                            buttonList = buttonList + `<button type="button" class="btn btn-secondary btn-success">Received </button>`
                         }
                         if (prepare == 0) {
                             buttonList = buttonList + `<button type="button" class="btn btn-secondary btn-danger">Preparing </button>`
@@ -246,7 +250,6 @@
                             list[i].addEventListener("click", obj.completeSale, false);
                         }
                     }
-
                 }
             },
             updateProg: function (e) {
@@ -254,25 +257,26 @@
                 e.target.classList.add("btn-success");
                 unameNode = e.target.parentNode.parentNode.parentNode.firstElementChild
                 uname = unameNode.innerHTML.trim().replace("Name: ", "")
-                obj.xhr.open("POST", "http://0.0.0.0:5000/api/v1/menu/prepare/" + uname, false);
-                obj.xhr.setRequestHeader("Content-Type", "application/json");
+                obj.xhr2.open("POST", "http://0.0.0.0:5000/api/v1/menu/prepare/" + uname, false);
+                obj.xhr2.setRequestHeader("Content-Type", "application/json");
                 data = {
                     "progress": e.target.innerHTML.toLowerCase().trim()
                 }
-                obj.xhr.send(JSON.stringify(data));
+                obj.xhr2.send(JSON.stringify(data));
             },
             completeSale: function (e) {
                 e.target.classList.remove("btn-danger");
                 e.target.classList.add("btn-success");
                 unameNode = e.target.parentNode.parentNode.parentNode.firstElementChild
                 uname = unameNode.innerHTML.trim().replace("Name: ", "")
-                obj.xhr.open("POST", "http://0.0.0.0:5000/api/v1/menu/complete/" + uname, false);
-                obj.xhr.setRequestHeader("Content-Type", "application/json");
-                obj.xhr.send();
+                obj.xhr2.open("POST", "http://0.0.0.0:5000/api/v1/menu/complete/" + uname, false);
+                obj.xhr2.setRequestHeader("Content-Type", "application/json");
+                obj.xhr2.send();
                 location.reload();
             }
         }
         window.addEventListener("load", obj.getOrders, false)
+        setInterval(obj.getOrders, 5000);
     </script>
 </body>
 

@@ -27,23 +27,121 @@
     <link rel="stylesheet" type="text/css" href="css/util.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <!--===============================================================================================-->
+    <style>
+        ol.progtrckr {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+        }
+
+        ol.progtrckr li {
+            display: inline-block;
+            text-align: center;
+            line-height: 3.5em;
+        }
+
+        ol.progtrckr[data-progtrckr-steps="2"] li {
+            width: 49%;
+        }
+
+        ol.progtrckr[data-progtrckr-steps="3"] li {
+            width: 33%;
+        }
+
+        ol.progtrckr[data-progtrckr-steps="4"] li {
+            width: 24%;
+        }
+
+        ol.progtrckr[data-progtrckr-steps="5"] li {
+            width: 19%;
+        }
+
+        ol.progtrckr[data-progtrckr-steps="6"] li {
+            width: 16%;
+        }
+
+        ol.progtrckr[data-progtrckr-steps="7"] li {
+            width: 14%;
+        }
+
+        ol.progtrckr[data-progtrckr-steps="8"] li {
+            width: 12%;
+        }
+
+        ol.progtrckr[data-progtrckr-steps="9"] li {
+            width: 11%;
+        }
+
+        ol.progtrckr li.progtrckr-done {
+            color: black;
+            border-bottom: 4px solid yellowgreen;
+        }
+
+        ol.progtrckr li.progtrckr-todo {
+            color: silver;
+            border-bottom: 4px solid silver;
+        }
+
+        ol.progtrckr li:after {
+            content: "\00a0\00a0";
+        }
+
+        ol.progtrckr li:before {
+            position: relative;
+            bottom: -2.5em;
+            float: left;
+            left: 50%;
+            line-height: 1em;
+        }
+
+        ol.progtrckr li.progtrckr-done:before {
+            content: "\2713";
+            color: white;
+            background-color: yellowgreen;
+            height: 2.2em;
+            width: 2.2em;
+            line-height: 2.2em;
+            border: none;
+            border-radius: 2.2em;
+        }
+
+        ol.progtrckr li.progtrckr-todo:before {
+            content: "\039F";
+            color: silver;
+            background-color: white;
+            font-size: 2.2em;
+            bottom: -1.2em;
+        }
+    </style>
 </head>
 
 <body>
+    <nav class="navbar fixed-top navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Food Delivery</a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link"><i class="fa fa-sign-out" aria-hidden="true"></i>Log-Out</a>
+            </li>
+        </ul>
+    </nav>
     <div class="limiter">
-        <div class="container-login100" style="background-image: url('images/bg-01.png');">
+        <div id="container" class="container-login100"
+            style="background-image: url('images/bg-01.png');padding-top: 50px;">
+            <div
+                style="width:1400px;height:200px; background-color: white;border-radius: 10px; justify-content: center;">
+                <ol class="progtrckr" data-progtrckr-steps="3">
+                    <li class="progtrckr-done">Order Confirmed</li>
+                    <li class="progtrckr-done">Order Preparing</li>
+                    <li class="progtrckr-todo">Out for Delivery</li>
+                </ol>
+                <span class="login100-form-title p-b-34 p-t-27" style="color: black;">
+                    Keep an eye on your order progress!
+                </span>
+            </div>
         </div>
     </div>
     <script>
-        var source = new EventSource("{{ url_for('sse.stream') }}");
-        source.addEventListener('progress', function (event) {
-            var data = JSON.parse(event.data);
-            console.log("The server says " + data.message);
-        }, false);
-        source.addEventListener('error', function (event) {
-            console.log("Error" + event)
-            alert("Failed to connect to event stream. Is Redis running?");
-        }, false);
+
     </script>
 </body>
 
