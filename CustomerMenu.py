@@ -1,8 +1,9 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, Response
 from flask_pymongo import PyMongo
 from pymongo import MongoClient
 from flask_cors import CORS
 import pymongo
+import datetime
 
 app = Flask(__name__)
 CORS(app)
@@ -252,11 +253,18 @@ def place_order(username):
     cost = q['total']
     if (make_payment(username, cost)):
         q = prepare.insert({
-            'username': username,
-            'ordno': order_no,
-            "received": 0,
-            "preparing": 0,
-            "delivery": 0
+            'username':
+            username,
+            'ordno':
+            order_no,
+            "received":
+            0,
+            "preparing":
+            0,
+            "delivery":
+            0,
+            "time":
+            datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
         })
         order_no += 1
         if (order_no > 50):
@@ -282,10 +290,51 @@ def get_orders():
                 'ordno': i['ordno'],
                 "received": i["received"],
                 "preparing": i["preparing"],
-                "delivery": i["delivery"]
+                "delivery": i["delivery"],
+                "time": i["time"]
             }
             output.append(temp)
         return jsonify(output), 200
+
+
+#Update Progress
+@app.route("/api/v1/menu/prepare/<username>", methods=['POST'])
+def update_progress(username):
+    prepare = db.prepare
+    try:
+        q1 = prepare.update({'username': username},
+                            {'$set': {
+                                request.json['progress']: 1
+                            }})
+        q = prepare.update({'username': username}, {
+            '$set': {
+                'time': datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+            }
+        })
+        return jsonify({}), 200
+    except:
+        return jsonify({}), 400
+
+
+#get progress
+@app.route("/api/v1/<username>/progress", methods=['GET'])
+def get_progress(username):
+    tm = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+    prepare = db.prepare
+    try:
+        q = prepare.find({"username": username})
+        if (q['time'] != tm):
+            output = {
+                "received": q['received'],
+                "preparing": q["preparing"],
+                "delivery": q["delivery"]
+            }
+
+            return jsonify(output), 200
+        elif (q['time'] == tm):
+            return jsonify({}), 304
+    except:
+        return jsonify({}), 204
 
 
 #Order completed

@@ -123,19 +123,19 @@
                         }
                         buttonList = ``
                         if (receive == 0) {
-                            buttonList = buttonList + `<button id="recieve" type="button" class="btn btn-secondary btn-danger">Recieved </button>`
+                            buttonList = buttonList + `<button type="button" class="btn btn-secondary btn-danger">Recieved </button>`
                         }
                         else {
                             buttonList = buttonList + `<button type="button" class="btn btn-secondary btn-success">Recieved </button>`
                         }
                         if (prepare == 0) {
-                            buttonList = buttonList + `<button id="prepare" type="button" class="btn btn-secondary btn-danger">Preparing </button>`
+                            buttonList = buttonList + `<button type="button" class="btn btn-secondary btn-danger">Preparing </button>`
                         }
                         else {
                             buttonList = buttonList + `<button type="button" class="btn btn-secondary btn-success">Preparing </button>`
                         }
                         if (deliver == 0) {
-                            buttonList = buttonList + `<button id="deliver" type="button" class="btn btn-secondary btn-danger">Delivery </button>`
+                            buttonList = buttonList + `<button type="button" class="btn btn-secondary btn-danger">Delivery </button>`
                         }
                         else {
                             buttonList = buttonList + `<button type="button" class="btn btn-secondary btn-success">Delivery </button>`
@@ -188,19 +188,19 @@
                         }
                         buttonList = ``
                         if (receive == 0) {
-                            buttonList = buttonList + `<button id="recieve" type="button" class="btn btn-secondary btn-danger">Recieved </button>`
+                            buttonList = buttonList + `<button type="button" class="btn btn-secondary btn-danger">Recieved </button>`
                         }
                         else {
                             buttonList = buttonList + `<button type="button" class="btn btn-secondary btn-success">Recieved </button>`
                         }
                         if (prepare == 0) {
-                            buttonList = buttonList + `<button id="prepare" type="button" class="btn btn-secondary btn-danger">Preparing </button>`
+                            buttonList = buttonList + `<button type="button" class="btn btn-secondary btn-danger">Preparing </button>`
                         }
                         else {
                             buttonList = buttonList + `<button type="button" class="btn btn-secondary btn-success">Preparing </button>`
                         }
                         if (deliver == 0) {
-                            buttonList = buttonList + `<button id="deliver" type="button" class="btn btn-secondary btn-danger">Delivery </button>`
+                            buttonList = buttonList + `<button type="button" class="btn btn-secondary btn-danger">Delivery </button>`
                         }
                         else {
                             buttonList = buttonList + `<button type="button" class="btn btn-secondary btn-success">Delivery </button>`
@@ -237,8 +237,39 @@
                         obj.rowDiv.appendChild(div)
                         obj.row = 0
                     }
+                    var list = document.getElementsByTagName("button")
+                    for (i = 0; i < list.length; i++) {
+                        if (list[i].innerHTML != "Complete") {
+                            list[i].addEventListener("click", obj.updateProg, false);
+                        }
+                        else {
+                            list[i].addEventListener("click", obj.completeSale, false);
+                        }
+                    }
 
                 }
+            },
+            updateProg: function (e) {
+                e.target.classList.remove("btn-danger");
+                e.target.classList.add("btn-success");
+                unameNode = e.target.parentNode.parentNode.parentNode.firstElementChild
+                uname = unameNode.innerHTML.trim().replace("Name: ", "")
+                obj.xhr.open("POST", "http://0.0.0.0:5000/api/v1/menu/prepare/" + uname, false);
+                obj.xhr.setRequestHeader("Content-Type", "application/json");
+                data = {
+                    "progress": e.target.innerHTML.toLowerCase().trim()
+                }
+                obj.xhr.send(JSON.stringify(data));
+            },
+            completeSale: function (e) {
+                e.target.classList.remove("btn-danger");
+                e.target.classList.add("btn-success");
+                unameNode = e.target.parentNode.parentNode.parentNode.firstElementChild
+                uname = unameNode.innerHTML.trim().replace("Name: ", "")
+                obj.xhr.open("POST", "http://0.0.0.0:5000/api/v1/menu/complete/" + uname, false);
+                obj.xhr.setRequestHeader("Content-Type", "application/json");
+                obj.xhr.send();
+                location.reload();
             }
         }
         window.addEventListener("load", obj.getOrders, false)
