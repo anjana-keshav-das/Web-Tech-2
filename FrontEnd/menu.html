@@ -553,8 +553,8 @@
                 var foodImage = document.createElement("div");
                 foodImage.classList.add("food_img");
                 var image = document.createElement("img");
-                image.src = "static/1.jpg"; //image data
-                // image.src = "'" + img[i] + "'"; //image data
+                //image.src = "static/1.jpg"; //image data
+                image.src = "/WebTech/FrontEnd" + img[i]; //image data
                 image.setAttribute("id", "imgId" + i);
                 foodImage.appendChild(image);
                 foodOuter.appendChild(foodImage);
