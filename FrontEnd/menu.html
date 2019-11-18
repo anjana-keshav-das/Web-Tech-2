@@ -323,8 +323,8 @@
 
     </ul>
     <div class="dropdown">
-        <button class="dropbtn">Logout</button>
-        <div class="dropdown-content" id="logout">
+        <button class="dropbtn" id="logout">Logout</button>
+        <div class="dropdown-content">
             <!-- <a href="#k">Link 1</a>
   						<a href="#s">Link 2</a>
   						<a href="#d">Link 3</a>
@@ -423,11 +423,59 @@
 
 
         }
+        var pr = [];
+        var names = [];
+        var descriptions = [];
+        var imgs = [];
         var log = ["link1", "link2", "link3"]
         var Amount = 0;
         //console.log(category.length)
         index = 1;
         index2 = 1;
+        var catpopobj = {
+            catpop: function () {
+                var cat = this.innerHTML;
+                //alert(cat)
+                var xhr = new XMLHttpRequest();
+                xhr.onreadystatechange = catpopobj.popc;
+                xhr.open("GET", "http://0.0.0.0:5000/api/v1/menu?category=" + cat);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.send();
+                // var res = this.responseText;
+                // console.log(res)
+            },
+            popc: function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var res = this.responseText;
+                    var resj = JSON.parse(res)
+                    // console.log(resj)
+                    $('#menu').empty()
+                    pr.length = 0;
+                    names.length = 0;
+                    descriptions.length = 0;
+                    imgs.length = 0;
+                    for (i in resj) {
+                        var prices = resj[i].price
+                        var name = resj[i].name
+                        var des = resj[i].desc
+                        var image = resj[i].img
+                        // console.log(image)
+                        // console.log(name)
+                        pr.push(prices)
+                        names.push(name)
+                        descriptions.push(des)
+                        imgs.push(image)
+
+                    }
+                    console.log(names)
+                    menuFill(names, descriptions, imgs, pr);
+
+                }
+            }
+
+
+
+        }
 
         function categoryFill(category) {
             for (element of category) {
@@ -435,6 +483,7 @@
                 var newSelect = document.getElementById("category");
                 var opt = document.createElement("li");
                 var link = document.createElement("a");
+                link.addEventListener("click", catpopobj.catpop, false)
                 link.href = "#category" + index; // link to each category.
                 link.innerHTML = element // display name of each category
                 opt.appendChild(link);
@@ -450,11 +499,6 @@
                 equalWidth2[i].style.width = "" + n + "%";
             }
 
-        }
-
-        function logout() {
-            document.cookie = 'CustUsername =;expires=Thu, 01 Jan 1970 00:00:01 GMT;'
-            location.replace("http://192.168.64.2/WebTech/FrontEnd/index.html")
         }
 
         var pr = [];
@@ -687,7 +731,7 @@
             xhr.open("POST", "http://0.0.0.0:5000/api/v1/menu/cart/buy/" + uname, false);
             xhr.setRequestHeader("Content-Type", "application/json");
             xhr.send();
-            alert(e);
+            //alert(e);
         }
 
         function verify() {
@@ -992,14 +1036,17 @@
 
         }
 
+        function signout() {
+            document.cookie = 'CustUsername =;expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+            location.replace("http://192.168.64.2/WebTech/FrontEnd/index.html")
+        }
 
 
         //addToDatabaseAndCart();
         window.addEventListener("load", obj.getallitems, false)
         window.addEventListener("load", objcats.getCats, false)
         window.addEventListener("load", objmenu.getMenu, false)
-        document.getElementById("logout").addEventListener("click", logout, false)
-
+        document.getElementById("logout").addEventListener("click", signout, false)
         // window.addEventListener("load", buildslideout,false)
         console.log(document.getElementById("t_butt"))
     </script>

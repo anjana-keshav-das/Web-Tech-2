@@ -124,7 +124,7 @@
         <a class="navbar-brand" href="#">Food Delivery</a>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link"><i class="fa fa-sign-out" aria-hidden="true"></i>Log-Out</a>
+                <a id="signout" class="nav-link"><i class="fa fa-sign-out" aria-hidden="true"></i>Log-Out</a>
             </li>
         </ul>
     </nav>
@@ -182,6 +182,12 @@
                 }
             }
         }
+        function signout() {
+            document.cookie = 'CustUsername =;expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+            location.replace("http://192.168.64.2/WebTech/FrontEnd/index.html")
+        }
+        document.getElementById("signout").addEventListener("click", signout, false);
+
         window.addEventListener("load", obj.monitor, false)
         setInterval(obj.monitor, 5000);
 
