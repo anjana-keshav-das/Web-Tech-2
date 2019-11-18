@@ -180,6 +180,10 @@
                     }
                     obj.time = resJSON['time']
                 }
+                else if (this.readyState == 4 && this.status == 400) {
+                    alert("Enjoy Your Meal!")
+                    location.replace("http://192.168.64.2/WebTech/FrontEnd/menu.html")
+                }
             }
         }
         function signout() {
