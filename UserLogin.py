@@ -419,11 +419,12 @@ def place_order(username):
     global order_no
     cart = db.cart
     prepare = db.prepare
+    recommend = db.recommend
     # try:
     q = cart.find_one({'username': username})
     cost = q['total']
     if (make_payment(username, cost)):
-        q = prepare.insert({
+        q2 = prepare.insert({
             'username':
             username,
             'ordno':
@@ -440,11 +441,28 @@ def place_order(username):
         order_no += 1
         if (order_no > 50):
             order_no = 0
+        q1 = recommend.remove({"username": username})
+        arr = []
+        print(q['items'])
+        for i in range(len(q['items'])):
+            arr.append(q['items'][i]['name'])
+        q = recommend.insert({"username": username, "items": arr})
         return jsonify({}), 200
     else:
         return jsonify({}), 402
     # except:
     #     return jsonify({}), 400
+
+
+#Get Recommendations
+@app.route("/api/v1/recommend/<username>", methods=['POST'])
+def get_recommendation(username):
+    recommend = db.recommend
+    q = recommend.find_one({'username': username})
+    output = []
+    for i in range(len(q['items'])):
+        output.append(q['items'][i])
+    return jsonify(output), 200
 
 
 #Get All Prepared
