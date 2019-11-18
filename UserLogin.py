@@ -3,6 +3,7 @@ from flask_cors import CORS
 from flask_pymongo import PyMongo
 from pymongo import MongoClient
 import pymongo
+import datetime
 
 app = Flask(__name__)
 CORS(app)
@@ -418,6 +419,7 @@ def place_order(username):
     global order_no
     cart = db.cart
     prepare = db.prepare
+    # try:
     q = cart.find_one({'username': username})
     cost = q['total']
     if (make_payment(username, cost)):
@@ -441,6 +443,8 @@ def place_order(username):
         return jsonify({}), 200
     else:
         return jsonify({}), 402
+    # except:
+    #     return jsonify({}), 400
 
 
 #Get All Prepared

@@ -33,7 +33,7 @@
 
     <div class="limiter">
         <div class="container-login100" style="background-image: url('images/bg-01.png');">
-            <div class="wrap-login100">
+            <div class="wrap-login100" style="width: 1200px">
                 <form class="login100-form validate-form">
                     <span class="login100-form-logo">
                         <i class="zmdi zmdi-landscape"></i>
@@ -42,30 +42,46 @@
                     <span class="login100-form-title p-b-34 p-t-27">
                         Sign Up
                     </span>
-
-                    <div class="wrap-input100 validate-input" data-validate="Enter Name">
-                        <input id="nm" class="input100" type="text" name="name" placeholder="Name">
-                        <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                    <div class="row">
+                        <div class="wrap-input100 validate-input col-5" data-validate="Enter Name">
+                            <input id="nm" class="input100" type="text" name="name" placeholder="Name">
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
+                        <div class="col-2"></div>
+                        <div class="wrap-input100 validate-input col-5" data-validate="Enter username">
+                            <input id="username" class="input100" type="text" name="username" placeholder="Username">
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
                     </div>
 
-                    <div class="wrap-input100 validate-input" data-validate="Enter username">
-                        <input id="username" class="input100" type="text" name="username" placeholder="Username">
-                        <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                    <div class="row">
+                        <div class="wrap-input100 validate-input col-5" data-validate="Enter Email">
+                            <input id="email" class="input100" type="email" name="email" placeholder="Email">
+                            <span class="focus-input100" data-placeholder="&#xf0e0;"></span>
+                        </div>
+                        <div class="col-2"></div>
+                        <div class="wrap-input100 validate-input col-5" data-validate="Enter Contact">
+                            <input id="cont" class="input100" type="text" name="contact" placeholder="Contact">
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
                     </div>
-
-                    <div class="wrap-input100 validate-input" data-validate="Enter Email">
-                        <input id="email" class="input100" type="email" name="email" placeholder="Email">
-                        <span class="focus-input100" data-placeholder="&#xf0e0;"></span>
+                    <div class="row">
+                        <div class="wrap-input100 validate-input col-5" data-validate="Enter password">
+                            <input id="pass" class="input100" type="password" name="pass" placeholder="Enter Password">
+                            <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                        </div>
+                        <div class="col-2"></div>
+                        <div class="wrap-input100 validate-input col-5" data-validate="Confirm password">
+                            <input id="confPass" class="input100" type="password" name="pass"
+                                placeholder="Confirm Password">
+                            <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                        </div>
                     </div>
-
-                    <div class="wrap-input100 validate-input" data-validate="Enter password">
-                        <input id="pass" class="input100" type="password" name="pass" placeholder="Enter Password">
-                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
-                    </div>
-                    <div class="wrap-input100 validate-input" data-validate="Confirm password">
-                        <input id="confPass" class="input100" type="password" name="pass"
-                            placeholder="Confirm Password">
-                        <span class="focus-input100" data-placeholder="&#xf191;"></span>
+                    <div class="row">
+                        <div class="wrap-input100 validate-input" data-validate="Enter Address">
+                            <input id="add" class="input100" type="text" name="address" placeholder="Address">
+                            <span class="focus-input100" data-placeholder="&#xf207;"></span>
+                        </div>
                     </div>
 
                     <div class="container-login100-form-btn">
@@ -247,6 +263,8 @@
         var confPass = document.getElementById("confPass");
         var nm = document.getElementById("nm");
         var email = document.getElementById("email");
+        var add = document.getElementById("add");
+        var cont = document.getElementById("cont")
 
         var obj = {
             xhr: new XMLHttpRequest,
@@ -275,7 +293,7 @@
                     obj.xhr.setRequestHeader("Content-Type", "application/json");
                     console.log(nm.value)
                     console.log(email)
-                    data = { 'contact': "", 'name': nm.value, 'address': "", 'email': email.value }
+                    data = { 'contact': cont.value, 'name': nm.value, 'address': add.value, 'email': email.value }
                     data = JSON.stringify(data);
                     console.log(data)
                     obj.xhr.send(data);

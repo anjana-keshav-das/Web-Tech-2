@@ -113,6 +113,10 @@
             bottom: -1.2em;
         }
     </style>
+    <script>
+        if (document.cookie.indexOf('CustUsername=') == -1)
+            location.replace("http://192.168.64.2/WebTech/FrontEnd/index.html")
+    </script>
 </head>
 
 <body>
@@ -141,12 +145,13 @@
         </div>
     </div>
     <script>
+        var uname = document.cookie.split('CustUsername=')[1].split(';')[0];
         var obj = {
             time: "01/01/18 00:00:00",
             xhr: new XMLHttpRequest(),
             monitor: function () {
                 obj.xhr.onreadystatechange = obj.updateProgress;
-                obj.xhr.open("POST", "http://0.0.0.0:5000/api/v1/anjana/progress", false);
+                obj.xhr.open("POST", "http://0.0.0.0:5000/api/v1/" + uname + "/progress", false);
                 obj.xhr.setRequestHeader("Content-Type", "application/json");
                 data = {
                     "time": obj.time

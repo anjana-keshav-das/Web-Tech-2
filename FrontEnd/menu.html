@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js'></script>
+    <link rel="stylesheet" href="./style.css">
+
+    <title>
+
+    </title>
+    <style type="text/css">
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            line-height: 1.5;
+            margin: 1em;
+            /* overflow: hidden; */
+            background-image: url("static/background2.jpg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            /*background-size: 100% 100%;*/
+            overflow-x: hidden;
+            width: 100%
+        }
+
+        ul {
+            position: absolute;
+            top: 7.6%;
+            left: 0%;
+            width: 100%;
+            height: 7.5%;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #330;
+            /* 		padding-top: 0.5%;
+*/
+            box-sizing: border-box;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover:not(.active) {
+            background-color: #111;
+        }
+
+        .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: absolute;
+            right: 0%;
+            top: 0%;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+
+        #logo {
+            /*background-image: url("static/logo.png");
+				background-repeat: no-repeat;*/
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            height: 7.5%;
+            width: 7%;
+        }
+
+        #empty_space {
+            position: absolute;
+            top: 0%;
+            left: 7%;
+            right: 5%;
+            background-color: #333;
+            height: 7.6%;
+            width: 100%;
+        }
+
+        #menu {
+            position: absolute;
+            top: 18%;
+            width: 85%;
+            display: flex;
+            flex-wrap: wrap;
+            /*background-color: white;*/
+        }
+
+        .food_outer {
+            height: 40%;
+            width: 230px;
+            padding: 2.5%;
+            background-color: white;
+            border-radius: 2%;
+            margin: 10px;
+        }
+
+        .food_img img {
+            height: 150px;
+            width: 250px;
+            border-radius: 2%;
+        }
+
+        .food_name {
+            padding-top: 1%;
+            padding-left: 10%;
+            text-align: left;
+            display: inline-flex;
+            width: 100%;
+        }
+
+        .food_name2 {
+            width: 70%;
+        }
+
+        .customButton {
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            width: 20%;
+            height: 100%;
+            text-align: center;
+            text-decoration: none;
+            -webkit-transition-duration: 0.4s;
+            /* Safari */
+            transition-duration: 0.4s;
+        }
+
+        .customButton:hover {
+            background-color: darkgreen;
+            /* Green */
+            color: white;
+        }
+
+        .food_desc {
+            padding-left: 5%;
+            padding-top: 1%;
+            font-size: 80%;
+            color: #333;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .quant_price {
+            display: flex;
+            padding: 5%;
+        }
+
+        .quantity {
+            width: 55%;
+        }
+
+        .price {
+            width: 50%;
+            text-align: center;
+            padding: 1%;
+            color: grey;
+            font-family: "Times New Roman", Times, serif;
+            font-weight: bold;
+        }
+
+        .add_to_cart {
+            background-color: #4CAF50;
+            /* Green */
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            width: 100%;
+            font-size: 16px;
+            -webkit-transition-duration: 0.4s;
+            /* Safari */
+            transition-duration: 0.4s;
+        }
+
+        .add_to_cart:hover {
+            background-color: darkgreen;
+            /* Green */
+            color: white;
+        }
+
+        .addContainer {}
+
+        .quantInput {
+            width: 80%;
+            padding: 2%;
+            border-radius: 2%;
+            border-style: inset;
+        }
+
+        #cartContainer {
+            width: 14.5%;
+            background-color: white;
+            /*height: 50%;*/
+            border-radius: 1%;
+            position: absolute;
+            top: 20%;
+            right: 1%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #cartTitle {
+            text-align: center;
+            background-color: #4CAF50;
+            color: white;
+            width: 50%;
+            padding: 5%;
+            border-radius: 3%;
+            margin-left: 20%;
+        }
+
+        .item {
+            width: 100%;
+            height: 100px;
+            background-color: grey;
+            display: inline-flex;
+        }
+
+        #total {
+            width: 100%;
+        }
+
+        .cartImg {
+            width: 50%;
+            height: 100%;
+        }
+
+        .cart_food_img {
+            height: 100%;
+            width: 100%;
+            border-radius: 2%;
+            border-style: inset;
+            /*box-shadow:  5px 5px 5px 5px	;*/
+        }
+
+        .cartDetails {
+            width: 50%;
+            height: 100%;
+        }
+
+        .cart_price_display {
+            text-align: center;
+            width: 100%;
+            height: 35%;
+            color: white;
+            font-size: 70%;
+        }
+
+        .cart_total_display {
+            width: 100%;
+            height: 25%;
+            text-align: center;
+            color: white;
+            padding: 2%;
+        }
+
+        #disp {
+            width: 100%;
+            height: ;
+            /*background-color: #4CAF50;*/
+            text-align: center;
+        }
+    </style>
+    <script>
+        if (document.cookie.indexOf('CustUsername=') == -1)
+            location.replace("http://192.168.64.2/WebTech/FrontEnd/index.html")
+    </script>
+
+</head>
+
+<body>
+    <div id="empty_space">
+
+    </div>
+    <div id="logo">
+        <img src="static/logo.jpg" style="width:100%;height:100%">
+    </div>
+    <ul id="category">
+
+    </ul>
+    <div class="dropdown">
+        <button class="dropbtn">Logout</button>
+        <div class="dropdown-content" id="logout">
+            <!-- <a href="#k">Link 1</a>
+  						<a href="#s">Link 2</a>
+  						<a href="#d">Link 3</a>
+ -->
+        </div>
+    </div>
+    <div id="cartContainer">
+        <h2 id="cartTitle">CART</h2>
+        <div id="cart">
+            <!-- <div class=item>
+						<div class="cartImg">
+							<img src="static/1.jpg" class="cart_food_img">
+						</div>
+						<div class="cartDetails">
+							<p class="cart_price_display">
+								Non Veg Supreme
+								<br>
+								4 x $ 200
+							</p>
+							<hr>
+							<p class="cart_total_display">
+								$800
+							</p>
+						</div>
+					</div> -->
+
+        </div>
+
+        <div id="total">
+            <P id="disp">Total=0
+                <p>
+
+                    <input type="submit" value="Check Out" class="add_to_cart" id="checkOutButton">
+        </div>
+        <div style="margin-bottom: 10px;">
+            <input type="button" name="clearCart" value="Clear Cart" id="clearCart" class="add_to_cart">
+        </div>
+    </div>
+    <div id="menu">
+        <!-- 	<div class="food_outer" >
+				<div class="food_img">
+					<img src="static/1.jpg">
+				</div>
+				<div class="food_name">
+					<h3>Non Veg Supreme</h3>
+				</div>
+				<hr>
+				<div class="food_desc">
+					good pizza.purely non-veg... so suck it vegetarians a
+				</div>
+				<div class="quant_price">
+					<div class="quantity">
+						<input type="text" name="item_quantity" placeholder="Enter quantity" class="quantInput">
+					</div>
+					<div class="price">
+						$100
+					</div>
+				</div>
+				<div class="addContainer">
+					<input type="button" name="addCart" value="Add Cart" class="add_to_cart">
+				</div>
+			</div> -->
+        <!--  -->
+    </div>
+
+
+
+
+
+
+    <script type="text/javascript">
+        var category = [];
+        var objcats = {
+            xhr: new XMLHttpRequest(),
+            getCats: function () {
+                objcats.xhr.onreadystatechange = objcats.popcats;
+                objcats.xhr.open("GET", "http://0.0.0.0:5000/api/v1/menu/category", false);
+                objcats.xhr.setRequestHeader("Content-Type", "application/json");
+                objcats.xhr.send();
+            },
+            popcats: function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    // alert("getting categories");
+                    var res = this.responseText;
+                    var resj = JSON.parse(res);
+                    // console.log(resj[0].category);
+                    for (i in resj) {
+                        var cats = resj[i].category
+                        category.push(cats)
+                    }
+                    categoryFill(category);
+
+
+                }
+            }
+
+
+        }
+        var log = ["link1", "link2", "link3"]
+        var Amount = 0;
+        //console.log(category.length)
+        index = 1;
+        index2 = 1;
+
+        function categoryFill(category) {
+            for (element of category) {
+                //console.log(element);
+                var newSelect = document.getElementById("category");
+                var opt = document.createElement("li");
+                var link = document.createElement("a");
+                link.href = "#category" + index; // link to each category.
+                link.innerHTML = element // display name of each category
+                opt.appendChild(link);
+                newSelect.appendChild(opt);
+                index++;
+            }
+            var equalWidth = document.getElementById("category");
+            var equalWidth2 = document.getElementsByTagName("li");
+            var i;
+            var n = 100 / (category.length)
+            //console.log(n);
+            for (i = 0; i < category.length; i++) {
+                equalWidth2[i].style.width = "" + n + "%";
+            }
+
+        }
+
+        function logout() {
+            document.cookie = 'CustUsername =;expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+            location.replace("http://192.168.64.2/WebTech/FrontEnd/index.html")
+        }
+
+        var pr = [];
+        var names = [];
+        var descriptions = [];
+        var imgs = [];
+        var objmenu = {
+            xhr: new XMLHttpRequest(),
+            getMenu: function () {
+                objmenu.xhr.onreadystatechange = objmenu.popmenu;
+                objmenu.xhr.open("GET", "http://0.0.0.0:5000/api/v1/menu", false);
+                objmenu.xhr.setRequestHeader("Content-Type", "application/json");
+                objmenu.xhr.send();
+            },
+            popmenu: function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    // alert("getting categories");
+                    var res = this.responseText;
+                    var resj = JSON.parse(res);
+                    console.log(resj);
+                    for (i in resj) {
+                        var prices = resj[i].price
+                        var name = resj[i].name
+                        var des = resj[i].desc
+                        var image = resj[i].img
+                        console.log(image)
+                        // console.log(name)
+                        pr.push(prices)
+                        names.push(name)
+                        descriptions.push(des)
+                        imgs.push(image)
+
+                    }
+                    menuFill(names, descriptions, imgs, pr);
+
+
+                }
+            }
+
+
+        }
+
+        function menuFill(name, desc, img, pr) {
+            var j = 0;
+            for (var i = 0; i < pr.length; i++) {
+                j = i;
+                var menuID = document.getElementById("menu");
+                var foodOuter = document.createElement("div");
+                foodOuter.classList.add("food_outer");
+
+
+                var foodImage = document.createElement("div");
+                foodImage.classList.add("food_img");
+                var image = document.createElement("img");
+                image.src = "static/1.jpg"; //image data
+                // image.src = "'" + img[i] + "'"; //image data
+                image.setAttribute("id", "imgId" + i);
+                foodImage.appendChild(image);
+                foodOuter.appendChild(foodImage);
+
+
+                var foodName = document.createElement("div");
+                foodName.classList.add("food_name");
+                var foodTitle = document.createElement("h4");
+                foodTitle.classList.add("food_name2")
+                foodTitle.innerHTML = name[i]; //food Name to be enterd
+                foodTitle.setAttribute("id", "prod_name" + i)
+                foodName.appendChild(foodTitle);
+
+                var customButton = document.createElement("input");
+                customButton.classList.add("customButton");
+                customButton.type = "button";
+                customButton.name = "cust";
+                customButton.value = "cust";
+                customButton.id = j;
+                // customButton.setAttribute(id, "custom_button" + j);
+                // customButton.addEventListener("click", buildslideout, false);
+
+                foodName.appendChild(customButton);
+                foodOuter.appendChild(foodName);
+
+
+                var rule = document.createElement("hr");
+                foodOuter.appendChild(rule);
+
+
+                var foodDesc = document.createElement("div");
+                foodDesc.classList.add("food_desc");
+                foodDesc.innerHTML = desc[i]; // description of food;
+                foodOuter.appendChild(foodDesc);
+
+
+                var quantPrice = document.createElement("div");
+                quantPrice.classList.add("quant_price");
+                var quant = document.createElement("div");
+                quant.classList.add("quantity");
+                var quantIn = document.createElement("input");
+                quantIn.type = "text";
+                quantIn.name = "item_quantity"; //used this name to retrieve quantity.
+                quantIn.placeholder = "Enter quantity";
+                quantIn.classList.add("quantInput");
+                quantIn.setAttribute("id", "prod" + i);
+                quant.appendChild(quantIn);
+                quantPrice.appendChild(quant);
+                var price = document.createElement("div");
+                price.classList.add("price");
+                price.setAttribute("id", "cost" + i);
+                price.innerHTML = pr[i]; // price
+                quantPrice.appendChild(price);
+                foodOuter.appendChild(quantPrice);
+
+
+                var addButtonContainer = document.createElement("div");
+                addButtonContainer.classList.add("addContainer");
+                var addButton = document.createElement("input");
+                addButton.type = "button";
+                addButton.name = "addCart";
+                addButton.value = "Add To Cart";
+                addButton.id = j;
+                addButton.addEventListener("click", function () {
+
+                    addToDatabaseAndCart(this.id)
+                }, false); //Bug here
+                addButton.classList.add("add_to_cart");
+                addButtonContainer.appendChild(addButton);
+                foodOuter.appendChild(addButtonContainer);
+                menuID.appendChild(foodOuter);
+                //j++;
+            }
+
+            // var allButtons=document.getElementsByClassName("add_to_cart");
+
+            // for(k=0;k<allButtons.length;k++){
+            // 	allButtons[k].addEventListener("click",function(){
+            // 		console.log("Clicked index: " + k);
+            // 		addToDatabaseAndCart(1);
+            // 	},true);
+
+            // }
+            //console.log(allButtons);
+        }
+
+        var uname = document.cookie.split('CustUsername=')[1].split(';')[0];
+
+        function addToDatabaseAndCart(ev) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "http://0.0.0.0:5000/api/v1/menu/cart/" + uname, false);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            var a = document.getElementById("prod" + ev);
+            //console.log(ev.firstChild.nextSibling.firstChild.innerHTML);
+            var b = document.getElementById("cost" + ev);
+            //var n=console.log(b.length);
+            var c = document.getElementById("prod_name" + ev);
+            var d = document.getElementById("imgId" + ev);
+            //console.log(d.src)
+            //console.log(a.value+" "+b.innerHTML+" "+c.innerHTML);
+            var cart = document.getElementById("cart")
+            qnt = a.value
+            var data = {
+                "name": c.innerHTML,
+                "price": parseInt(b.innerHTML),
+                "quantity": parseInt(qnt)
+
+            }
+            console.log(data)
+            xhr.send(JSON.stringify(data));
+
+
+
+            var item = document.createElement("div");
+            item.classList.add("item");
+            var cartImg = document.createElement("div");
+            cartImg.classList.add("cartImg");
+            var cart_img = document.createElement("img");
+            cart_img.src = d.src;
+            cart_img.classList.add("cart_food_img");
+            cartImg.appendChild(cart_img);
+            item.appendChild(cartImg);
+
+            var cartDetails = document.createElement("div");
+            cartDetails.classList.add("cartDetails");
+            var cartPriceDisplay = document.createElement("p");
+            cartPriceDisplay.classList.add("cart_price_display");
+            cartPriceDisplay.innerHTML = c.innerHTML + " <br> " + a.value + " x " + b.innerHTML;
+
+            cartDetails.appendChild(cartPriceDisplay);
+
+            var hr = document.createElement("hr");
+            cartDetails.appendChild(hr);
+
+            var cartTotalDisplay = document.createElement("p");
+            cartTotalDisplay.classList.add("cart_total_display");
+            var temp = b.innerHTML.split(" ");
+            // console.log(temp);
+            var c = temp[0]
+            var temp2 = parseInt(a.value) * parseInt(temp[0]);
+            // console.log(a.value + " " + temp2)
+            cartTotalDisplay.innerHTML = "Rs." + temp2;
+
+            cartDetails.appendChild(cartTotalDisplay);
+
+            item.appendChild(cartDetails);
+            cart.appendChild(item);
+
+            Amount += temp2;
+            // console.log(Amount);
+
+            var disp = document.getElementById("disp");
+            disp.innerHTML = "Total=" + Amount;
+
+        }
+
+        function openCustomTab(ev) {
+
+            // alert("custom tab for item:  " + ev);
+            //Fill custom code here
+        }
+
+        function submitCart() {
+            var checkOutButton = document.getElementById("checkOutButton");
+            checkOutButton.addEventListener("click", function () {
+                checkOut(Amount);
+            });
+        }
+
+        function checkOut(e) {
+            //Fill in this code
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = verify;
+            xhr.open("POST", "http://0.0.0.0:5000/api/v1/menu/cart/buy/" + uname, false);
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.send();
+            alert(e);
+        }
+
+        function verify() {
+            if (this.readyState == 4 && this.status == 402) {
+                alert("Please add items to the cart!");
+            }
+            else if (this.readyState == 4 && this.status == 200) {
+                location.replace("http://192.168.64.2/WebTech/FrontEnd/progress.html");
+            }
+        }
+
+        function clearCart() {
+            var clearCartButton = document.getElementById("clearCart");
+            clearCartButton.addEventListener("click", function () {
+                //alert("clearCart");
+                var xhr = new XMLHttpRequest();
+                xhr.open("DELETE", "http://0.0.0.0:5000/api/v1/menu/cart/" + uname, false);
+                xhr.setRequestHeader("Content-Type", "application/json");
+                xhr.send();
+                var e = document.getElementById("cart");
+                var child = e.lastElementChild;
+                while (child) {
+                    e.removeChild(child);
+                    child = e.lastElementChild;
+                    Amount = 0;
+                    var disp = document.getElementById("disp");
+                    disp.innerHTML = "Total=" + Amount;
+
+                }
+            })
+        }
+
+
+
+
+
+
+
+
+        //logoutFill(log);
+        // menuFill();
+        submitCart();
+        clearCart();
+        // cats = "Vegetarian";
+        // cats = 0;
+        var obj = {
+            xhr: new XMLHttpRequest(),
+            getallitems: function (cats) {
+                obj.xhr.onreadystatechange = obj.poplitems;
+                if (cats == 0) {
+                    obj.xhr.open("GET", "http://0.0.0.0:5000/api/v1/menu?category=" + cats, false)
+
+                    obj.xhr.setRequestHeader("Content-Type", "application/json");
+                    obj.xhr.send();
+                } else {
+                    obj.xhr.open("GET", "http://0.0.0.0:5000/api/v1/menu", false);
+                    obj.xhr.setRequestHeader("Content-Type", "application/json");
+                    obj.xhr.send();
+                }
+
+
+            },
+            poplitems: function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log("HELLO I'M POPULATING");
+                    // buildslideout();
+                    var res = obj.xhr.responseText;
+                    var resj = JSON.parse(res);
+                    console.log(resj);
+                }
+            }
+        }
+
+
+        function addlisteners() {
+            var test = document.getElementsByClassName("hide")
+            alert(test.data)
+            $('.show').click(function () {
+                $('.slideout').addClass('on');
+            });
+
+            $('.hide').click(function () {
+                // alert("test")
+                $('.slideout').removeClass('on');
+            });
+            var slide = document.getElementsByClassName("hide")
+            alert(slide.value)
+
+            $(document).ready(function () {
+                var itemsMainDiv = ('.MultiCarousel');
+                var itemsDiv = ('.MultiCarousel-inner');
+                var itemWidth = "";
+
+                $('.leftLst, .rightLst').click(function () {
+                    var condition = $(this).hasClass("leftLst");
+                    if (condition)
+                        click(0, this);
+                    else
+                        click(1, this)
+                });
+
+                ResCarouselSize();
+
+
+
+
+                $(window).resize(function () {
+                    ResCarouselSize();
+                });
+
+                //this function define the size of the items
+                function ResCarouselSize() {
+                    var incno = 0;
+                    var dataItems = ("data-items");
+                    var itemClass = ('.item');
+                    var id = 0;
+                    var btnParentSb = '';
+                    var itemsSplit = '';
+                    var sampwidth = $(itemsMainDiv).width();
+                    var bodyWidth = $('body').width();
+                    $(itemsDiv).each(function () {
+                        id = id + 1;
+                        var itemNumbers = $(this).find(itemClass).length;
+                        btnParentSb = $(this).parent().attr(dataItems);
+                        itemsSplit = btnParentSb.split(',');
+                        $(this).parent().attr("id", "MultiCarousel" + id);
+
+
+                        if (bodyWidth >= 1200) {
+                            incno = itemsSplit[3];
+                            itemWidth = sampwidth / incno;
+                        } else if (bodyWidth >= 992) {
+                            incno = itemsSplit[2];
+                            itemWidth = sampwidth / incno;
+                        } else if (bodyWidth >= 768) {
+                            incno = itemsSplit[1];
+                            itemWidth = sampwidth / incno;
+                        } else {
+                            incno = itemsSplit[0];
+                            itemWidth = sampwidth / incno;
+                        }
+                        $(this).css({
+                            'transform': 'translateX(0px)',
+                            'width': itemWidth * itemNumbers
+                        });
+                        $(this).find(itemClass).each(function () {
+                            $(this).outerWidth(itemWidth);
+                        });
+
+                        $(".leftLst").addClass("over");
+                        $(".rightLst").removeClass("over");
+
+                    });
+                }
+
+
+                //this function used to move the items
+                function ResCarousel(e, el, s) {
+                    var leftBtn = ('.leftLst');
+                    var rightBtn = ('.rightLst');
+                    var translateXval = '';
+                    var divStyle = $(el + ' ' + itemsDiv).css('transform');
+                    var values = divStyle.match(/-?[\d\.]+/g);
+                    var xds = Math.abs(values[4]);
+                    if (e == 0) {
+                        translateXval = parseInt(xds) - parseInt(itemWidth * s);
+                        $(el + ' ' + rightBtn).removeClass("over");
+
+                        if (translateXval <= itemWidth / 2) {
+                            translateXval = 0;
+                            $(el + ' ' + leftBtn).addClass("over");
+                        }
+                    } else if (e == 1) {
+                        var itemsCondition = $(el).find(itemsDiv).width() - $(el).width();
+                        translateXval = parseInt(xds) + parseInt(itemWidth * s);
+                        $(el + ' ' + leftBtn).removeClass("over");
+
+                        if (translateXval >= itemsCondition - itemWidth / 2) {
+                            translateXval = itemsCondition;
+                            $(el + ' ' + rightBtn).addClass("over");
+                        }
+                    }
+                    $(el + ' ' + itemsDiv).css('transform', 'translateX(' + -translateXval + 'px)');
+                }
+
+                //It is used to get some elements from btn
+                function click(ell, ee) {
+                    var Parent = "#" + $(ee).parent().attr("id");
+                    var slide = $(Parent).attr("data-slide");
+                    ResCarousel(ell, Parent, slide);
+                }
+
+            });
+
+        }
+
+        function buildslideout() {
+            // alert("building slideout")
+            var sl = document.createElement("div")
+            sl.classList.add("slideout")
+            sl.innerHTML = `
+            <button type="button" class="hide">Close</button>
+            <div id='img' style="">
+                <img id="img_t" src="pizza.jpg" alt="WTF">
+             </div>
+            <div id="txt1">
+                <h4>TITLE OF PIZZA TITLE OF PIZZA</h4>
+                <p>oenfodfowoefnowndflkaNDFLKJASDF LASDLSHDFHSJDlakjshdiuq DSHushdkasjND LIJBKLJABSDLKJBa lsdblkIUDASDKjbalksdblkqwhELlskdbj
+                </p>
+            </div>
+            <div id="txt1">
+                <h4>Add Veg Toppings</h4>
+                <hr>
+                <p>oenfodfowoefnowndflkaNDFLKJASDF LASDLSHDFHSJDlakjshdiuq DSHushdkasjND LIJBKLJABSDLKJBa lsdblkIUDASDKjbalksdblkqwhELlskdbj
+                </p>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="MultiCarousel" data-items="1,3,5,6" data-slide="1" id="MultiCarousel" data-interval="1000">
+                        <div class="MultiCarousel-inner">
+                            <div class="item">
+                                <p class="lead">Multi Item</p>
+                                <div class="pad15">
+                                    <div id="t_div">
+                                        <img class="topps" style=" " id="t_img" alt="img" src="pepe.png">
+                                    </div>
+                                    <button id="t_butt">Add</button>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <p class="lead">Multi Item</p>
+                                <div class="pad15">
+                                    <div id="t_div">
+                                        <img class="topps" id="t_img" alt="img" src="">
+                                    </div>
+                                    <button id="t_butt">Add</button>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <p class="lead">Multi Item</p>
+                                <div class="pad15">
+                                    <div id="t_div">
+                                        <img class="topps" id="t_img" alt="img" src="pepe.png">
+                                    </div>
+                                    <button id="t_butt">Add</button>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <p class="lead">Multi Item</p>
+                                <div class="pad15">
+                                    <div id="t_div">
+                                        <img class="topps" id="t_img" alt="img" src="pepe.png">
+                                    </div>
+                                    <button id="t_butt">Add</button>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <p class="lead">Multi Item</p>
+                                <div class="pad15">
+                                    <div id="t_div">
+                                        <img class="topps" id="t_img" alt="img" src="pepe.png">
+                                    </div>
+                                    <button id="t_butt">Add</button>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <p class="lead">Multi Item</p>
+                                <div class="pad15">
+                                    <div id="t_div">
+                                        <img class="topps" id="t_img" alt="img" src="pepe.png">
+                                    </div>
+                                    <button id="t_butt">Add</button>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <p class="lead">Multi Item</p>
+                                <div class="pad15">
+                                    <div id="t_div">
+                                        <img class="topps" id="t_img" alt="img" src="pepe.png">
+                                    </div>
+                                    <button id="t_butt">Add</button>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <p class="lead">Multi Item</p>
+                                <div class="pad15">
+                                    <div id="t_div">
+                                        <img class="topps" id="t_img" alt="img" src="pepe.png">
+                                    </div>
+                                    <button id="t_butt">Add</button>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary leftLst"><</button>
+                        <button class="btn btn-primary rightLst">></button>
+                    </div>
+                </div>
+            </div>`;
+            addlisteners();
+            document.body.appendChild(sl);
+
+
+        }
+
+
+
+        //addToDatabaseAndCart();
+        window.addEventListener("load", obj.getallitems, false)
+        window.addEventListener("load", objcats.getCats, false)
+        window.addEventListener("load", objmenu.getMenu, false)
+        document.getElementById("logout").addEventListener("click", logout, false)
+
+        // window.addEventListener("load", buildslideout,false)
+        console.log(document.getElementById("t_butt"))
+    </script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <!-- <script src="./script.js"></script> -->
+    <!-- <script src='https://code.jquery.com/jquery-1.11.1.min.js'></script> -->
+    <!-- <script src="./script.js"></script> -->
+</body>
+
+</html>

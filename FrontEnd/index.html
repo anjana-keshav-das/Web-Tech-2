@@ -247,8 +247,10 @@
 					var resJSON = JSON.parse(res);
 					var pass = document.getElementById("password")
 					pass = SHA1(pass.value)
-					if (pass == resJSON['password'])
-						alert("Login success!")
+					if (pass == resJSON['password']) {
+						document.cookie = "CustUsername=" + resJSON['username']
+						location.replace("http://192.168.64.2/WebTech/FrontEnd/menu.html")
+					}
 					else
 						alert("Incorrect Password!")
 				}
