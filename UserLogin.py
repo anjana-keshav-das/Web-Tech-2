@@ -455,7 +455,7 @@ def place_order(username):
 
 
 #Get Recommendations
-@app.route("/api/v1/recommend/<username>", methods=['POST'])
+@app.route("/api/v1/recommend/<username>", methods=['GET'])
 def get_recommendation(username):
     recommend = db.recommend
     q = recommend.find_one({'username': username})

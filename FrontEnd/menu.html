@@ -397,6 +397,7 @@
 
     <script type="text/javascript">
         var category = [];
+        var uname = document.cookie.split('CustUsername=')[1].split(';')[0];
         var objcats = {
             xhr: new XMLHttpRequest(),
             getCats: function () {
@@ -467,7 +468,7 @@
                         imgs.push(image)
 
                     }
-                    console.log(names)
+                    // console.log(names)
                     menuFill(names, descriptions, imgs, pr);
 
                 }
@@ -518,13 +519,13 @@
                     // alert("getting categories");
                     var res = this.responseText;
                     var resj = JSON.parse(res);
-                    console.log(resj);
+                    // console.log(resj);
                     for (i in resj) {
                         var prices = resj[i].price
                         var name = resj[i].name
                         var des = resj[i].desc
                         var image = resj[i].img
-                        console.log(image)
+                        // console.log(image)
                         // console.log(name)
                         pr.push(prices)
                         names.push(name)
@@ -533,14 +534,51 @@
 
                     }
                     menuFill(names, descriptions, imgs, pr);
-
+                    recobj.recolor();
 
                 }
             }
 
 
         }
+        var recobj = {
+            recolor: function () {
+                xhr = new XMLHttpRequest(),
+                    xhr.onreadystatechange = recobj.getreco
+                xhr.open("GET", "http://0.0.0.0:5000/api/v1/recommend/" + uname, false);
+                xhr.send();
 
+            },
+            getreco: function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    var res = this.responseText
+                    var resj = JSON.parse(res)
+                    console.log(resj);
+                    console.log(pr.length)
+                    i = 0;
+                    while (i < pr.length) {
+
+                        var iditem = "prod_name" + i;
+                        // alert(iditem)
+                        // console.log($("#" + iditem).html())
+                        for (j = 0; j < resj.length; j++) {
+                            console.log(resj[j])
+                            if ($("#" + iditem).html() == resj[j]) {
+                                // alert("HI")
+                                $("#" + iditem).html(resj[j] + "</br>(Recommended)")
+                                $("#" + iditem).css("color", "green")
+                            }
+                        }
+
+
+
+                        i = i + 1;
+                    }
+
+                }
+
+            }
+        }
         function menuFill(name, desc, img, pr) {
             var j = 0;
             for (var i = 0; i < pr.length; i++) {
@@ -548,6 +586,7 @@
                 var menuID = document.getElementById("menu");
                 var foodOuter = document.createElement("div");
                 foodOuter.classList.add("food_outer");
+                // foodOuter.id = ("fo" +)
 
 
                 var foodImage = document.createElement("div");
@@ -577,7 +616,7 @@
                 // customButton.setAttribute(id, "custom_button" + j);
                 // customButton.addEventListener("click", buildslideout, false);
 
-                foodName.appendChild(customButton);
+                // foodName.appendChild(customButton);
                 foodOuter.appendChild(foodName);
 
 
@@ -641,7 +680,7 @@
             //console.log(allButtons);
         }
 
-        var uname = document.cookie.split('CustUsername=')[1].split(';')[0];
+
 
         function addToDatabaseAndCart(ev) {
             var xhr = new XMLHttpRequest();
@@ -663,7 +702,7 @@
                 "quantity": parseInt(qnt)
 
             }
-            console.log(data)
+            // console.log(data)
             xhr.send(JSON.stringify(data));
 
 
@@ -796,11 +835,11 @@
             },
             poplitems: function () {
                 if (this.readyState == 4 && this.status == 200) {
-                    console.log("HELLO I'M POPULATING");
+                    // console.log("HELLO I'M POPULATING");
                     // buildslideout();
                     var res = obj.xhr.responseText;
                     var resj = JSON.parse(res);
-                    console.log(resj);
+                    // console.log(resj);
                 }
             }
         }
@@ -1046,9 +1085,10 @@
         window.addEventListener("load", obj.getallitems, false)
         window.addEventListener("load", objcats.getCats, false)
         window.addEventListener("load", objmenu.getMenu, false)
+        // window.addEventListener("load", recobj.recolor, false)
         document.getElementById("logout").addEventListener("click", signout, false)
         // window.addEventListener("load", buildslideout,false)
-        console.log(document.getElementById("t_butt"))
+        // console.log(document.getElementById("t_butt"))
     </script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <!-- <script src="./script.js"></script> -->
